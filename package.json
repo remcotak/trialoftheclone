@@ -1,0 +1,19 @@
+{
+  "name": "trialoftheclone",
+  "version": "1.0.0",
+  "description": "Trial of the clone adventure book helper application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/remcotak/trialoftheclone.git"
+  },
+  "author": "Remco Tak",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/remcotak/trialoftheclone/issues"
+  },
+  "homepage": "https://github.com/remcotak/trialoftheclone#readme"
+}

@@ -1,7 +1,7 @@
 {
-  "name": "sick-fits-frontend",
+  "name": "trial-of-the-clone",
   "version": "1.0.0",
-  "description": "Sick Fits! An example React, GraphQL, Next and Apollo",
+  "description": "Trial of the clone adventure book helper application",
   "main": "index.js",
   "scripts": {
     "dev": "next -p 7777",

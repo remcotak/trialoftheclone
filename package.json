@@ -1,5 +1,5 @@
 {
-  "name": "trialoftheclone",
+  "name": "trial-of-the-clone",
   "version": "1.0.0",
   "description": "Trial of the clone adventure book helper application",
   "main": "index.js",
@@ -11,7 +11,7 @@
     "url": "git+https://github.com/remcotak/trialoftheclone.git"
   },
   "author": "Remco Tak",
-  "license": "MIT",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/remcotak/trialoftheclone/issues"
   },

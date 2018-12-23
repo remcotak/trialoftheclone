@@ -1,4 +1,45 @@
 type User {
   id: ID! @unique
   name: String!
+  createdAt: DateTime!
+  adventures: [Adventure]
+}
+
+type Adventure {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  isAlive: Boolean! @default(value: "true")
+  user: User!
+  aspects: [Aspect]
+  inventory: [Item]
+  stats: Stats!
+}
+
+type Aspect {
+  id: ID! @unique
+  title: String!
+  effect: String!
+}
+
+type Item {
+  id: ID! @unique
+  title: String!
+  effect: String!
+}
+
+type Stats {
+  id: ID! @unique
+  healthPoints: Int! @default(value: 0)
+  maxHealthPoints: Int! @default(value: 20)
+  charisma: Int! @default(value: 0)
+  fighting: Int! @default(value: 1)
+  wits: Int! @default(value: 0)
+  weapons: [Weapon]
+}
+
+type Weapon {
+  id: ID! @unique
+  title: String!
+  effect: String!
 }

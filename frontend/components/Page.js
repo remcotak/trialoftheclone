@@ -4,14 +4,18 @@ import Header from './Header';
 import Meta from './Meta';
 
 const theme = {
-  primary: '#E0335E',
-  secondary: '#FF8100',
+  primary: '#ffd800',
+  secondary: '#54b6b4',
   black: '#393939',
+  gray: '#9e9e9e',
   white: '#fff',
   maxWidth: '1000px',
   fontRegular: `'Alegreya-Regular', 'Arial', 'sans-serif'`,
   fontHeading: `'FjallaOne-Regular', 'Arial', 'sans-serif'`,
-  bs: '0 12px 24px 0 rgba(0, 0, 0, 0.09)'
+  bs: '0 5px 15px 0 rgba(0, 0, 0, 0.09)',
+  spacingLarge: '40px',
+  spacingBase: '20px',
+  spacingSmall: '10px'
 };
 
 const GlobalStyle = createGlobalStyle`

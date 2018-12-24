@@ -1,15 +1,12 @@
 # source: https://eu1.prisma.sh/remco-tak-12c628/trails-of-the-clone/dev
-# timestamp: Sun Dec 23 2018 23:09:02 GMT+0100 (Central European Standard Time)
+# timestamp: Mon Dec 24 2018 10:32:26 GMT+0100 (Central European Standard Time)
 
 type Adventure implements Node {
   id: ID!
+  title: String!
   createdAt: DateTime!
   updatedAt: DateTime!
   isAlive: Boolean!
-  user: User!
-  aspects(where: AspectWhereInput, orderBy: AspectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Aspect!]
-  inventory(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item!]
-  stats: Stats!
 }
 
 """A connection to a list of items."""
@@ -23,23 +20,13 @@ type AdventureConnection {
 }
 
 input AdventureCreateInput {
+  title: String!
   isAlive: Boolean
-  user: UserCreateOneWithoutAdventuresInput!
-  aspects: AspectCreateManyInput
-  inventory: ItemCreateManyInput
-  stats: StatsCreateOneInput!
 }
 
-input AdventureCreateManyWithoutUserInput {
-  create: [AdventureCreateWithoutUserInput!]
+input AdventureCreateManyInput {
+  create: [AdventureCreateInput!]
   connect: [AdventureWhereUniqueInput!]
-}
-
-input AdventureCreateWithoutUserInput {
-  isAlive: Boolean
-  aspects: AspectCreateManyInput
-  inventory: ItemCreateManyInput
-  stats: StatsCreateOneInput!
 }
 
 """An edge in a connection."""
@@ -54,6 +41,8 @@ type AdventureEdge {
 enum AdventureOrderByInput {
   id_ASC
   id_DESC
+  title_ASC
+  title_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -64,6 +53,7 @@ enum AdventureOrderByInput {
 
 type AdventurePreviousValues {
   id: ID!
+  title: String!
   createdAt: DateTime!
   updatedAt: DateTime!
   isAlive: Boolean!
@@ -118,6 +108,46 @@ input AdventureScalarWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -207,31 +237,35 @@ input AdventureSubscriptionWhereInput {
   node: AdventureWhereInput
 }
 
-input AdventureUpdateInput {
+input AdventureUpdateDataInput {
+  title: String
   isAlive: Boolean
-  user: UserUpdateOneRequiredWithoutAdventuresInput
-  aspects: AspectUpdateManyInput
-  inventory: ItemUpdateManyInput
-  stats: StatsUpdateOneRequiredInput
+}
+
+input AdventureUpdateInput {
+  title: String
+  isAlive: Boolean
 }
 
 input AdventureUpdateManyDataInput {
+  title: String
   isAlive: Boolean
 }
 
-input AdventureUpdateManyMutationInput {
-  isAlive: Boolean
-}
-
-input AdventureUpdateManyWithoutUserInput {
-  create: [AdventureCreateWithoutUserInput!]
+input AdventureUpdateManyInput {
+  create: [AdventureCreateInput!]
   connect: [AdventureWhereUniqueInput!]
   disconnect: [AdventureWhereUniqueInput!]
   delete: [AdventureWhereUniqueInput!]
-  update: [AdventureUpdateWithWhereUniqueWithoutUserInput!]
+  update: [AdventureUpdateWithWhereUniqueNestedInput!]
   updateMany: [AdventureUpdateManyWithWhereNestedInput!]
   deleteMany: [AdventureScalarWhereInput!]
-  upsert: [AdventureUpsertWithWhereUniqueWithoutUserInput!]
+  upsert: [AdventureUpsertWithWhereUniqueNestedInput!]
+}
+
+input AdventureUpdateManyMutationInput {
+  title: String
+  isAlive: Boolean
 }
 
 input AdventureUpdateManyWithWhereNestedInput {
@@ -239,22 +273,15 @@ input AdventureUpdateManyWithWhereNestedInput {
   data: AdventureUpdateManyDataInput!
 }
 
-input AdventureUpdateWithoutUserDataInput {
-  isAlive: Boolean
-  aspects: AspectUpdateManyInput
-  inventory: ItemUpdateManyInput
-  stats: StatsUpdateOneRequiredInput
+input AdventureUpdateWithWhereUniqueNestedInput {
+  where: AdventureWhereUniqueInput!
+  data: AdventureUpdateDataInput!
 }
 
-input AdventureUpdateWithWhereUniqueWithoutUserInput {
+input AdventureUpsertWithWhereUniqueNestedInput {
   where: AdventureWhereUniqueInput!
-  data: AdventureUpdateWithoutUserDataInput!
-}
-
-input AdventureUpsertWithWhereUniqueWithoutUserInput {
-  where: AdventureWhereUniqueInput!
-  update: AdventureUpdateWithoutUserDataInput!
-  create: AdventureCreateWithoutUserInput!
+  update: AdventureUpdateDataInput!
+  create: AdventureCreateInput!
 }
 
 input AdventureWhereInput {
@@ -266,195 +293,6 @@ input AdventureWhereInput {
 
   """Logical NOT on all given filters combined by AND."""
   NOT: [AdventureWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  createdAt: DateTime
-
-  """All values that are not equal to given value."""
-  createdAt_not: DateTime
-
-  """All values that are contained in given list."""
-  createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  createdAt_lte: DateTime
-
-  """All values greater than the given value."""
-  createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-
-  """All values that are not equal to given value."""
-  updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
-  updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
-  updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  updatedAt_gte: DateTime
-  isAlive: Boolean
-
-  """All values that are not equal to given value."""
-  isAlive_not: Boolean
-  user: UserWhereInput
-  aspects_every: AspectWhereInput
-  aspects_some: AspectWhereInput
-  aspects_none: AspectWhereInput
-  inventory_every: ItemWhereInput
-  inventory_some: ItemWhereInput
-  inventory_none: ItemWhereInput
-  stats: StatsWhereInput
-}
-
-input AdventureWhereUniqueInput {
-  id: ID
-}
-
-type AggregateAdventure {
-  count: Int!
-}
-
-type AggregateAspect {
-  count: Int!
-}
-
-type AggregateItem {
-  count: Int!
-}
-
-type AggregateStats {
-  count: Int!
-}
-
-type AggregateUser {
-  count: Int!
-}
-
-type AggregateWeapon {
-  count: Int!
-}
-
-type Aspect implements Node {
-  id: ID!
-  title: String!
-  effect: String!
-}
-
-"""A connection to a list of items."""
-type AspectConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [AspectEdge]!
-  aggregate: AggregateAspect!
-}
-
-input AspectCreateInput {
-  title: String!
-  effect: String!
-}
-
-input AspectCreateManyInput {
-  create: [AspectCreateInput!]
-  connect: [AspectWhereUniqueInput!]
-}
-
-"""An edge in a connection."""
-type AspectEdge {
-  """The item at the end of the edge."""
-  node: Aspect!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum AspectOrderByInput {
-  id_ASC
-  id_DESC
-  title_ASC
-  title_DESC
-  effect_ASC
-  effect_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
-}
-
-type AspectPreviousValues {
-  id: ID!
-  title: String!
-  effect: String!
-}
-
-input AspectScalarWhereInput {
-  """Logical AND on all given filters."""
-  AND: [AspectScalarWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [AspectScalarWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [AspectScalarWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -535,46 +373,131 @@ input AspectScalarWhereInput {
 
   """All values not ending with the given string."""
   title_not_ends_with: String
-  effect: String
+  createdAt: DateTime
 
   """All values that are not equal to given value."""
-  effect_not: String
+  createdAt_not: DateTime
 
   """All values that are contained in given list."""
-  effect_in: [String!]
+  createdAt_in: [DateTime!]
 
   """All values that are not contained in given list."""
-  effect_not_in: [String!]
+  createdAt_not_in: [DateTime!]
 
   """All values less than the given value."""
-  effect_lt: String
+  createdAt_lt: DateTime
 
   """All values less than or equal the given value."""
-  effect_lte: String
+  createdAt_lte: DateTime
 
   """All values greater than the given value."""
-  effect_gt: String
+  createdAt_gt: DateTime
 
   """All values greater than or equal the given value."""
-  effect_gte: String
+  createdAt_gte: DateTime
+  updatedAt: DateTime
 
-  """All values containing the given string."""
-  effect_contains: String
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
 
-  """All values not containing the given string."""
-  effect_not_contains: String
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
 
-  """All values starting with the given string."""
-  effect_starts_with: String
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
 
-  """All values not starting with the given string."""
-  effect_not_starts_with: String
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
 
-  """All values ending with the given string."""
-  effect_ends_with: String
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
 
-  """All values not ending with the given string."""
-  effect_not_ends_with: String
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  isAlive: Boolean
+
+  """All values that are not equal to given value."""
+  isAlive_not: Boolean
+}
+
+input AdventureWhereUniqueInput {
+  id: ID
+}
+
+type AggregateAdventure {
+  count: Int!
+}
+
+type AggregateAspect {
+  count: Int!
+}
+
+type AggregateItem {
+  count: Int!
+}
+
+type AggregateStats {
+  count: Int!
+}
+
+type AggregateUser {
+  count: Int!
+}
+
+type AggregateWeapon {
+  count: Int!
+}
+
+type Aspect implements Node {
+  id: ID!
+  title: String!
+  effect: String!
+}
+
+"""A connection to a list of items."""
+type AspectConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [AspectEdge]!
+  aggregate: AggregateAspect!
+}
+
+input AspectCreateInput {
+  title: String!
+  effect: String!
+}
+
+"""An edge in a connection."""
+type AspectEdge {
+  """The item at the end of the edge."""
+  node: Aspect!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum AspectOrderByInput {
+  id_ASC
+  id_DESC
+  title_ASC
+  title_DESC
+  effect_ASC
+  effect_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type AspectPreviousValues {
+  id: ID!
+  title: String!
+  effect: String!
 }
 
 type AspectSubscriptionPayload {
@@ -616,51 +539,14 @@ input AspectSubscriptionWhereInput {
   node: AspectWhereInput
 }
 
-input AspectUpdateDataInput {
-  title: String
-  effect: String
-}
-
 input AspectUpdateInput {
   title: String
   effect: String
 }
 
-input AspectUpdateManyDataInput {
-  title: String
-  effect: String
-}
-
-input AspectUpdateManyInput {
-  create: [AspectCreateInput!]
-  connect: [AspectWhereUniqueInput!]
-  disconnect: [AspectWhereUniqueInput!]
-  delete: [AspectWhereUniqueInput!]
-  update: [AspectUpdateWithWhereUniqueNestedInput!]
-  updateMany: [AspectUpdateManyWithWhereNestedInput!]
-  deleteMany: [AspectScalarWhereInput!]
-  upsert: [AspectUpsertWithWhereUniqueNestedInput!]
-}
-
 input AspectUpdateManyMutationInput {
   title: String
   effect: String
-}
-
-input AspectUpdateManyWithWhereNestedInput {
-  where: AspectScalarWhereInput!
-  data: AspectUpdateManyDataInput!
-}
-
-input AspectUpdateWithWhereUniqueNestedInput {
-  where: AspectWhereUniqueInput!
-  data: AspectUpdateDataInput!
-}
-
-input AspectUpsertWithWhereUniqueNestedInput {
-  where: AspectWhereUniqueInput!
-  update: AspectUpdateDataInput!
-  create: AspectCreateInput!
 }
 
 input AspectWhereInput {
@@ -826,11 +712,6 @@ input ItemCreateInput {
   effect: String!
 }
 
-input ItemCreateManyInput {
-  create: [ItemCreateInput!]
-  connect: [ItemWhereUniqueInput!]
-}
-
 """An edge in a connection."""
 type ItemEdge {
   """The item at the end of the edge."""
@@ -857,137 +738,6 @@ type ItemPreviousValues {
   id: ID!
   title: String!
   effect: String!
-}
-
-input ItemScalarWhereInput {
-  """Logical AND on all given filters."""
-  AND: [ItemScalarWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [ItemScalarWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [ItemScalarWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  title: String
-
-  """All values that are not equal to given value."""
-  title_not: String
-
-  """All values that are contained in given list."""
-  title_in: [String!]
-
-  """All values that are not contained in given list."""
-  title_not_in: [String!]
-
-  """All values less than the given value."""
-  title_lt: String
-
-  """All values less than or equal the given value."""
-  title_lte: String
-
-  """All values greater than the given value."""
-  title_gt: String
-
-  """All values greater than or equal the given value."""
-  title_gte: String
-
-  """All values containing the given string."""
-  title_contains: String
-
-  """All values not containing the given string."""
-  title_not_contains: String
-
-  """All values starting with the given string."""
-  title_starts_with: String
-
-  """All values not starting with the given string."""
-  title_not_starts_with: String
-
-  """All values ending with the given string."""
-  title_ends_with: String
-
-  """All values not ending with the given string."""
-  title_not_ends_with: String
-  effect: String
-
-  """All values that are not equal to given value."""
-  effect_not: String
-
-  """All values that are contained in given list."""
-  effect_in: [String!]
-
-  """All values that are not contained in given list."""
-  effect_not_in: [String!]
-
-  """All values less than the given value."""
-  effect_lt: String
-
-  """All values less than or equal the given value."""
-  effect_lte: String
-
-  """All values greater than the given value."""
-  effect_gt: String
-
-  """All values greater than or equal the given value."""
-  effect_gte: String
-
-  """All values containing the given string."""
-  effect_contains: String
-
-  """All values not containing the given string."""
-  effect_not_contains: String
-
-  """All values starting with the given string."""
-  effect_starts_with: String
-
-  """All values not starting with the given string."""
-  effect_not_starts_with: String
-
-  """All values ending with the given string."""
-  effect_ends_with: String
-
-  """All values not ending with the given string."""
-  effect_not_ends_with: String
 }
 
 type ItemSubscriptionPayload {
@@ -1029,51 +779,14 @@ input ItemSubscriptionWhereInput {
   node: ItemWhereInput
 }
 
-input ItemUpdateDataInput {
-  title: String
-  effect: String
-}
-
 input ItemUpdateInput {
   title: String
   effect: String
 }
 
-input ItemUpdateManyDataInput {
-  title: String
-  effect: String
-}
-
-input ItemUpdateManyInput {
-  create: [ItemCreateInput!]
-  connect: [ItemWhereUniqueInput!]
-  disconnect: [ItemWhereUniqueInput!]
-  delete: [ItemWhereUniqueInput!]
-  update: [ItemUpdateWithWhereUniqueNestedInput!]
-  updateMany: [ItemUpdateManyWithWhereNestedInput!]
-  deleteMany: [ItemScalarWhereInput!]
-  upsert: [ItemUpsertWithWhereUniqueNestedInput!]
-}
-
 input ItemUpdateManyMutationInput {
   title: String
   effect: String
-}
-
-input ItemUpdateManyWithWhereNestedInput {
-  where: ItemScalarWhereInput!
-  data: ItemUpdateManyDataInput!
-}
-
-input ItemUpdateWithWhereUniqueNestedInput {
-  where: ItemWhereUniqueInput!
-  data: ItemUpdateDataInput!
-}
-
-input ItemUpsertWithWhereUniqueNestedInput {
-  where: ItemWhereUniqueInput!
-  update: ItemUpdateDataInput!
-  create: ItemCreateInput!
 }
 
 input ItemWhereInput {
@@ -1219,41 +932,41 @@ scalar Long
 
 type Mutation {
   createUser(data: UserCreateInput!): User!
-  createAdventure(data: AdventureCreateInput!): Adventure!
   createAspect(data: AspectCreateInput!): Aspect!
-  createStats(data: StatsCreateInput!): Stats!
   createItem(data: ItemCreateInput!): Item!
+  createStats(data: StatsCreateInput!): Stats!
   createWeapon(data: WeaponCreateInput!): Weapon!
+  createAdventure(data: AdventureCreateInput!): Adventure!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  updateAdventure(data: AdventureUpdateInput!, where: AdventureWhereUniqueInput!): Adventure
   updateAspect(data: AspectUpdateInput!, where: AspectWhereUniqueInput!): Aspect
-  updateStats(data: StatsUpdateInput!, where: StatsWhereUniqueInput!): Stats
   updateItem(data: ItemUpdateInput!, where: ItemWhereUniqueInput!): Item
+  updateStats(data: StatsUpdateInput!, where: StatsWhereUniqueInput!): Stats
   updateWeapon(data: WeaponUpdateInput!, where: WeaponWhereUniqueInput!): Weapon
+  updateAdventure(data: AdventureUpdateInput!, where: AdventureWhereUniqueInput!): Adventure
   deleteUser(where: UserWhereUniqueInput!): User
-  deleteAdventure(where: AdventureWhereUniqueInput!): Adventure
   deleteAspect(where: AspectWhereUniqueInput!): Aspect
-  deleteStats(where: StatsWhereUniqueInput!): Stats
   deleteItem(where: ItemWhereUniqueInput!): Item
+  deleteStats(where: StatsWhereUniqueInput!): Stats
   deleteWeapon(where: WeaponWhereUniqueInput!): Weapon
+  deleteAdventure(where: AdventureWhereUniqueInput!): Adventure
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
-  upsertAdventure(where: AdventureWhereUniqueInput!, create: AdventureCreateInput!, update: AdventureUpdateInput!): Adventure!
   upsertAspect(where: AspectWhereUniqueInput!, create: AspectCreateInput!, update: AspectUpdateInput!): Aspect!
-  upsertStats(where: StatsWhereUniqueInput!, create: StatsCreateInput!, update: StatsUpdateInput!): Stats!
   upsertItem(where: ItemWhereUniqueInput!, create: ItemCreateInput!, update: ItemUpdateInput!): Item!
+  upsertStats(where: StatsWhereUniqueInput!, create: StatsCreateInput!, update: StatsUpdateInput!): Stats!
   upsertWeapon(where: WeaponWhereUniqueInput!, create: WeaponCreateInput!, update: WeaponUpdateInput!): Weapon!
+  upsertAdventure(where: AdventureWhereUniqueInput!, create: AdventureCreateInput!, update: AdventureUpdateInput!): Adventure!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
-  updateManyAdventures(data: AdventureUpdateManyMutationInput!, where: AdventureWhereInput): BatchPayload!
   updateManyAspects(data: AspectUpdateManyMutationInput!, where: AspectWhereInput): BatchPayload!
-  updateManyStatses(data: StatsUpdateManyMutationInput!, where: StatsWhereInput): BatchPayload!
   updateManyItems(data: ItemUpdateManyMutationInput!, where: ItemWhereInput): BatchPayload!
+  updateManyStatses(data: StatsUpdateManyMutationInput!, where: StatsWhereInput): BatchPayload!
   updateManyWeapons(data: WeaponUpdateManyMutationInput!, where: WeaponWhereInput): BatchPayload!
+  updateManyAdventures(data: AdventureUpdateManyMutationInput!, where: AdventureWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
-  deleteManyAdventures(where: AdventureWhereInput): BatchPayload!
   deleteManyAspects(where: AspectWhereInput): BatchPayload!
-  deleteManyStatses(where: StatsWhereInput): BatchPayload!
   deleteManyItems(where: ItemWhereInput): BatchPayload!
+  deleteManyStatses(where: StatsWhereInput): BatchPayload!
   deleteManyWeapons(where: WeaponWhereInput): BatchPayload!
+  deleteManyAdventures(where: AdventureWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -1285,23 +998,23 @@ type PageInfo {
 
 type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
-  adventures(where: AdventureWhereInput, orderBy: AdventureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Adventure]!
   aspects(where: AspectWhereInput, orderBy: AspectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Aspect]!
-  statses(where: StatsWhereInput, orderBy: StatsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Stats]!
   items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item]!
+  statses(where: StatsWhereInput, orderBy: StatsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Stats]!
   weapons(where: WeaponWhereInput, orderBy: WeaponOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Weapon]!
+  adventures(where: AdventureWhereInput, orderBy: AdventureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Adventure]!
   user(where: UserWhereUniqueInput!): User
-  adventure(where: AdventureWhereUniqueInput!): Adventure
   aspect(where: AspectWhereUniqueInput!): Aspect
-  stats(where: StatsWhereUniqueInput!): Stats
   item(where: ItemWhereUniqueInput!): Item
+  stats(where: StatsWhereUniqueInput!): Stats
   weapon(where: WeaponWhereUniqueInput!): Weapon
+  adventure(where: AdventureWhereUniqueInput!): Adventure
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
-  adventuresConnection(where: AdventureWhereInput, orderBy: AdventureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AdventureConnection!
   aspectsConnection(where: AspectWhereInput, orderBy: AspectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AspectConnection!
-  statsesConnection(where: StatsWhereInput, orderBy: StatsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StatsConnection!
   itemsConnection(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ItemConnection!
+  statsesConnection(where: StatsWhereInput, orderBy: StatsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StatsConnection!
   weaponsConnection(where: WeaponWhereInput, orderBy: WeaponOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): WeaponConnection!
+  adventuresConnection(where: AdventureWhereInput, orderBy: AdventureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AdventureConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -1337,11 +1050,6 @@ input StatsCreateInput {
   fighting: Int
   wits: Int
   weapons: WeaponCreateManyInput
-}
-
-input StatsCreateOneInput {
-  create: StatsCreateInput
-  connect: StatsWhereUniqueInput
 }
 
 """An edge in a connection."""
@@ -1420,15 +1128,6 @@ input StatsSubscriptionWhereInput {
   node: StatsWhereInput
 }
 
-input StatsUpdateDataInput {
-  healthPoints: Int
-  maxHealthPoints: Int
-  charisma: Int
-  fighting: Int
-  wits: Int
-  weapons: WeaponUpdateManyInput
-}
-
 input StatsUpdateInput {
   healthPoints: Int
   maxHealthPoints: Int
@@ -1444,18 +1143,6 @@ input StatsUpdateManyMutationInput {
   charisma: Int
   fighting: Int
   wits: Int
-}
-
-input StatsUpdateOneRequiredInput {
-  create: StatsCreateInput
-  connect: StatsWhereUniqueInput
-  update: StatsUpdateDataInput
-  upsert: StatsUpsertNestedInput
-}
-
-input StatsUpsertNestedInput {
-  update: StatsUpdateDataInput!
-  create: StatsCreateInput!
 }
 
 input StatsWhereInput {
@@ -1628,11 +1315,11 @@ input StatsWhereUniqueInput {
 
 type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
-  adventure(where: AdventureSubscriptionWhereInput): AdventureSubscriptionPayload
   aspect(where: AspectSubscriptionWhereInput): AspectSubscriptionPayload
-  stats(where: StatsSubscriptionWhereInput): StatsSubscriptionPayload
   item(where: ItemSubscriptionWhereInput): ItemSubscriptionPayload
+  stats(where: StatsSubscriptionWhereInput): StatsSubscriptionPayload
   weapon(where: WeaponSubscriptionWhereInput): WeaponSubscriptionPayload
+  adventure(where: AdventureSubscriptionWhereInput): AdventureSubscriptionPayload
 }
 
 type User implements Node {
@@ -1654,16 +1341,7 @@ type UserConnection {
 
 input UserCreateInput {
   name: String!
-  adventures: AdventureCreateManyWithoutUserInput
-}
-
-input UserCreateOneWithoutAdventuresInput {
-  create: UserCreateWithoutAdventuresInput
-  connect: UserWhereUniqueInput
-}
-
-input UserCreateWithoutAdventuresInput {
-  name: String!
+  adventures: AdventureCreateManyInput
 }
 
 """An edge in a connection."""
@@ -1733,27 +1411,11 @@ input UserSubscriptionWhereInput {
 
 input UserUpdateInput {
   name: String
-  adventures: AdventureUpdateManyWithoutUserInput
+  adventures: AdventureUpdateManyInput
 }
 
 input UserUpdateManyMutationInput {
   name: String
-}
-
-input UserUpdateOneRequiredWithoutAdventuresInput {
-  create: UserCreateWithoutAdventuresInput
-  connect: UserWhereUniqueInput
-  update: UserUpdateWithoutAdventuresDataInput
-  upsert: UserUpsertWithoutAdventuresInput
-}
-
-input UserUpdateWithoutAdventuresDataInput {
-  name: String
-}
-
-input UserUpsertWithoutAdventuresInput {
-  update: UserUpdateWithoutAdventuresDataInput!
-  create: UserCreateWithoutAdventuresInput!
 }
 
 input UserWhereInput {

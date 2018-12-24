@@ -2,8 +2,10 @@
 
 type Mutation {
   createUser(name: String!): User
+  createAdventure(title: String!, alive: Boolean): Adventure
 }
 
 type Query {
   users: [User]!
+  adventures: [Adventure]!
 }

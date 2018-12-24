@@ -10,6 +10,17 @@ const Mutations = {
     );
 
     return user;
+  },
+
+  async createAdventure(parent, args, ctx, info) {
+    const adventure = await ctx.db.mutation.createAdventure(
+      {
+        data: { ...args }
+      },
+      info
+    );
+
+    return adventure;
   }
 };
 

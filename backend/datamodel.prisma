@@ -7,13 +7,14 @@ type User {
 
 type Adventure {
   id: ID! @unique
+  title: String!
   createdAt: DateTime!
   updatedAt: DateTime!
   isAlive: Boolean! @default(value: "true")
-  user: User!
-  aspects: [Aspect]
-  inventory: [Item]
-  stats: Stats!
+  # user: User!
+  # aspects: [Aspect]
+  # inventory: [Item]
+  # stats: Stats!
 }
 
 type Aspect {

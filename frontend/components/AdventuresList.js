@@ -18,7 +18,7 @@ const ALL_ADVENTURES_QUERY = gql`
   }
 `;
 
-const AdventuresStyles = styled.div`
+const AdventuresListStyles = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: ${props => props.theme.spacingLarge};
@@ -29,7 +29,7 @@ const AdventuresStyles = styled.div`
   }
 `;
 
-class Adventures extends Component {
+class AdventuresList extends Component {
   render() {
     return (
       <Query query={ALL_ADVENTURES_QUERY}>
@@ -38,11 +38,11 @@ class Adventures extends Component {
           if (error) return <p>Error: {error.message}</p>;
 
           return (
-            <AdventuresStyles>
+            <AdventuresListStyles>
               {data.adventures.map(adventure => (
                 <AdventureItem adventure={adventure} key={adventure.id} />
               ))}
-            </AdventuresStyles>
+            </AdventuresListStyles>
           );
         }}
       </Query>
@@ -50,5 +50,5 @@ class Adventures extends Component {
   }
 }
 
-export default Adventures;
+export default AdventuresList;
 export { ALL_ADVENTURES_QUERY };

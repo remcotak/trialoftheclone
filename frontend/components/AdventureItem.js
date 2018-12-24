@@ -3,6 +3,7 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import formatDate from '../lib/formatDate';
+import { ButtonAnchor } from '../components/styles/Button';
 
 const AdventureStyles = styled.div`
   display: flex;
@@ -53,33 +54,11 @@ const AdventureStyles = styled.div`
     border-top: 2px solid ${props => props.theme.black};
 
     & > * {
-      position: relative;
-      font-family: ${props => props.theme.fontHeading};
-      padding: 15px;
       flex-grow: 1;
       text-align: center;
+      border: 0;
       border-left: 1px solid ${props => props.theme.black};
       border-right: 1px solid ${props => props.theme.black};
-
-      &::after {
-        content: '';
-        position: absolute;
-        display: block;
-        top: 0;
-        right: 100%;
-        bottom: 0;
-        left: 0;
-        background-color: ${props => props.theme.primary};
-        z-index: -1;
-        transition: all 0.1s ease-in;
-      }
-
-      &:hover,
-      &:focus {
-        &::after {
-          right: 0;
-        }
-      }
     }
 
     & > *:first-child {
@@ -139,7 +118,7 @@ class Adventure extends Component {
                 query: { id: id }
               }}
             >
-              <a>Start! 🎮</a>
+              <ButtonAnchor>Start! 🎮</ButtonAnchor>
             </Link>
           ) : (
             <Link
@@ -148,7 +127,7 @@ class Adventure extends Component {
                 query: { id: id }
               }}
             >
-              <a>View 👀</a>
+              <ButtonAnchor>View 👀</ButtonAnchor>
             </Link>
           )}
           <Link
@@ -157,7 +136,7 @@ class Adventure extends Component {
               query: { id: id }
             }}
           >
-            <a>Delete 🗑</a>
+            <ButtonAnchor>Delete 🗑</ButtonAnchor>
           </Link>
         </div>
       </AdventureStyles>

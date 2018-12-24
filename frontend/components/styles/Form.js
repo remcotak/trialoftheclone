@@ -72,23 +72,6 @@ const Form = styled.form`
       border-color: ${props => props.theme.primary};
     }
   }
-
-  button,
-  input[type='submit'] {
-    background: none;
-    border: 2px solid ${props => props.theme.black};
-    padding: ${props => props.theme.spacingSmall}
-      ${props => props.theme.spacingBase};
-    font-size: 1rem;
-    font-weight: bold;
-    font-family: ${props => props.theme.fontHeading};
-    color: ${props => props.theme.black};
-
-    &:hover,
-    &:focus {
-      background-color: ${props => props.theme.primary};
-    }
-  }
 `;
 
 export default Form;

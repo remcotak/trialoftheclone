@@ -1,11 +1,13 @@
 # import * from './generated/prisma.graphql'
 
 type Mutation {
-  createUser(name: String!): User
-  createAdventure(title: String!, act: Int, page: Int): Adventure
+  createUser(name: String!): User!
+  createAdventure(title: String!, act: Int, page: Int): Adventure!
+  updateAdventure(id: ID!, title: String, act: Int, page: Int): Adventure!
 }
 
 type Query {
   users: [User]!
   adventures: [Adventure]!
+  adventure(where: AdventureWhereUniqueInput!): Adventure!
 }

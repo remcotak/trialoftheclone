@@ -21,6 +21,23 @@ const Mutations = {
     );
 
     return adventure;
+  },
+
+  async updateAdventure(parent, args, ctx, info) {
+    // Take a copy of the updates
+    const updates = { ...args };
+    // Then delete the id, since we dont want to update that
+    delete updates.id;
+    // Run the update mutation
+    const adventure = await ctx.db.mutation.updateAdventure(
+      {
+        data: updates,
+        where: { id: args.id }
+      },
+      info
+    );
+
+    return adventure;
   }
 };
 

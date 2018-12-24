@@ -39,7 +39,7 @@ const Header = () => (
     <Link href="/adventures">
       <a>Adventures</a>
     </Link>
-    <Link href="/stats">
+    {/* <Link href="/stats">
       <a>Stats</a>
     </Link>
     <Link href="/inventory">
@@ -47,7 +47,7 @@ const Header = () => (
     </Link>
     <Link href="/aspects">
       <a>Aspects</a>
-    </Link>
+    </Link> */}
   </StyledHeader>
 );
 

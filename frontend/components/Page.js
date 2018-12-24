@@ -15,7 +15,8 @@ const theme = {
   bs: '0 5px 15px 0 rgba(0, 0, 0, 0.09)',
   spacingLarge: '40px',
   spacingBase: '20px',
-  spacingSmall: '10px'
+  spacingSmall: '10px',
+  spacingTiny: '5px'
 };
 
 const GlobalStyle = createGlobalStyle`
@@ -31,6 +32,20 @@ const GlobalStyle = createGlobalStyle`
     src: url('/static/Alegreya-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Alegreya-Regular';
+    src: url('/static/Alegreya-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Alegreya-Regular';
+    src: url('/static/Alegreya-Italic.woff2') format('woff2');
+    font-weight: normal;
+    font-style: italic;
     font-display: swap;
   }
   html {

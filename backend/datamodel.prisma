@@ -11,6 +11,8 @@ type Adventure {
   createdAt: DateTime!
   updatedAt: DateTime!
   isAlive: Boolean! @default(value: "true")
+  act: Int! @default(value: 1)
+  page: Int! @default(value: 1)
   # user: User!
   # aspects: [Aspect]
   # inventory: [Item]

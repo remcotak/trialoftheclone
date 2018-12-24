@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/remco-tak-12c628/trails-of-the-clone/dev
-# timestamp: Mon Dec 24 2018 10:32:26 GMT+0100 (Central European Standard Time)
+# timestamp: Mon Dec 24 2018 13:49:15 GMT+0100 (Central European Standard Time)
 
 type Adventure implements Node {
   id: ID!
@@ -7,6 +7,8 @@ type Adventure implements Node {
   createdAt: DateTime!
   updatedAt: DateTime!
   isAlive: Boolean!
+  act: Int!
+  page: Int!
 }
 
 """A connection to a list of items."""
@@ -22,6 +24,8 @@ type AdventureConnection {
 input AdventureCreateInput {
   title: String!
   isAlive: Boolean
+  act: Int
+  page: Int
 }
 
 input AdventureCreateManyInput {
@@ -49,6 +53,10 @@ enum AdventureOrderByInput {
   updatedAt_DESC
   isAlive_ASC
   isAlive_DESC
+  act_ASC
+  act_DESC
+  page_ASC
+  page_DESC
 }
 
 type AdventurePreviousValues {
@@ -57,6 +65,8 @@ type AdventurePreviousValues {
   createdAt: DateTime!
   updatedAt: DateTime!
   isAlive: Boolean!
+  act: Int!
+  page: Int!
 }
 
 input AdventureScalarWhereInput {
@@ -196,6 +206,50 @@ input AdventureScalarWhereInput {
 
   """All values that are not equal to given value."""
   isAlive_not: Boolean
+  act: Int
+
+  """All values that are not equal to given value."""
+  act_not: Int
+
+  """All values that are contained in given list."""
+  act_in: [Int!]
+
+  """All values that are not contained in given list."""
+  act_not_in: [Int!]
+
+  """All values less than the given value."""
+  act_lt: Int
+
+  """All values less than or equal the given value."""
+  act_lte: Int
+
+  """All values greater than the given value."""
+  act_gt: Int
+
+  """All values greater than or equal the given value."""
+  act_gte: Int
+  page: Int
+
+  """All values that are not equal to given value."""
+  page_not: Int
+
+  """All values that are contained in given list."""
+  page_in: [Int!]
+
+  """All values that are not contained in given list."""
+  page_not_in: [Int!]
+
+  """All values less than the given value."""
+  page_lt: Int
+
+  """All values less than or equal the given value."""
+  page_lte: Int
+
+  """All values greater than the given value."""
+  page_gt: Int
+
+  """All values greater than or equal the given value."""
+  page_gte: Int
 }
 
 type AdventureSubscriptionPayload {
@@ -240,16 +294,22 @@ input AdventureSubscriptionWhereInput {
 input AdventureUpdateDataInput {
   title: String
   isAlive: Boolean
+  act: Int
+  page: Int
 }
 
 input AdventureUpdateInput {
   title: String
   isAlive: Boolean
+  act: Int
+  page: Int
 }
 
 input AdventureUpdateManyDataInput {
   title: String
   isAlive: Boolean
+  act: Int
+  page: Int
 }
 
 input AdventureUpdateManyInput {
@@ -266,6 +326,8 @@ input AdventureUpdateManyInput {
 input AdventureUpdateManyMutationInput {
   title: String
   isAlive: Boolean
+  act: Int
+  page: Int
 }
 
 input AdventureUpdateManyWithWhereNestedInput {
@@ -421,6 +483,50 @@ input AdventureWhereInput {
 
   """All values that are not equal to given value."""
   isAlive_not: Boolean
+  act: Int
+
+  """All values that are not equal to given value."""
+  act_not: Int
+
+  """All values that are contained in given list."""
+  act_in: [Int!]
+
+  """All values that are not contained in given list."""
+  act_not_in: [Int!]
+
+  """All values less than the given value."""
+  act_lt: Int
+
+  """All values less than or equal the given value."""
+  act_lte: Int
+
+  """All values greater than the given value."""
+  act_gt: Int
+
+  """All values greater than or equal the given value."""
+  act_gte: Int
+  page: Int
+
+  """All values that are not equal to given value."""
+  page_not: Int
+
+  """All values that are contained in given list."""
+  page_in: [Int!]
+
+  """All values that are not contained in given list."""
+  page_not_in: [Int!]
+
+  """All values less than the given value."""
+  page_lt: Int
+
+  """All values less than or equal the given value."""
+  page_lte: Int
+
+  """All values greater than the given value."""
+  page_gt: Int
+
+  """All values greater than or equal the given value."""
+  page_gte: Int
 }
 
 input AdventureWhereUniqueInput {

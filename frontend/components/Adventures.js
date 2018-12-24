@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
-import Adventure from '../components/Adventure';
 import gql from 'graphql-tag';
+import AdventureItem from './AdventureItem';
 import styled from 'styled-components';
 
 const ALL_ADVENTURES_QUERY = gql`
@@ -9,6 +9,8 @@ const ALL_ADVENTURES_QUERY = gql`
     adventures {
       id
       title
+      act
+      page
       isAlive
       createdAt
       updatedAt
@@ -38,7 +40,7 @@ class Adventures extends Component {
           return (
             <AdventuresStyles>
               {data.adventures.map(adventure => (
-                <Adventure adventure={adventure} key={adventure.id} />
+                <AdventureItem adventure={adventure} key={adventure.id} />
               ))}
             </AdventuresStyles>
           );
@@ -49,3 +51,4 @@ class Adventures extends Component {
 }
 
 export default Adventures;
+export { ALL_ADVENTURES_QUERY };

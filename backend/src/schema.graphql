@@ -2,7 +2,7 @@
 
 type Mutation {
   createUser(name: String!): User
-  createAdventure(title: String!, alive: Boolean): Adventure
+  createAdventure(title: String!, act: Int, page: Int): Adventure
 }
 
 type Query {

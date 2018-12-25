@@ -10,6 +10,7 @@ const sharedStyle = css`
   font-weight: bold;
   font-family: ${props => props.theme.fontHeading};
   text-align: center;
+  line-height: 1.2;
   color: ${props => props.theme.black};
 
   &::after {

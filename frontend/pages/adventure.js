@@ -1,9 +1,9 @@
-import UpdateAdventure from '../components/UpdateAdventure';
+import AdventureDetail from '../components/AdventureDetail';
 
 const Adventure = ({ query }) => (
   <div>
     <h1>Adventure time! 🏞</h1>
-    <UpdateAdventure id={query.id} />
+    <AdventureDetail id={query.id} />
   </div>
 );
 

@@ -38,6 +38,16 @@ const Mutations = {
     );
 
     return adventure;
+  },
+
+  async deleteAdventure(parent, args, ctx, info) {
+    const where = { id: args.id };
+    // Find the adventure
+    const adventure = await ctx.db.query.adventure({ where }, `{ id title}`);
+    // Check if user has permission to delete the adventure
+    // TODO:
+    // Delete the adventure
+    return ctx.db.mutation.deleteAdventure({ where }, info);
   }
 };
 

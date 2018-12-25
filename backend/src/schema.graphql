@@ -4,6 +4,7 @@ type Mutation {
   createUser(name: String!): User!
   createAdventure(title: String!, act: Int, page: Int): Adventure!
   updateAdventure(id: ID!, title: String, act: Int, page: Int): Adventure!
+  deleteAdventure(id: ID!): Adventure
 }
 
 type Query {

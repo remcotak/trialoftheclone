@@ -35,7 +35,7 @@ const UPDATE_ADVENTURE_MUTATION = gql`
   }
 `;
 
-class UpdateAdventure extends Component {
+class AdventureDetail extends Component {
   state = {};
 
   handleChange = e => {
@@ -122,5 +122,5 @@ class UpdateAdventure extends Component {
   }
 }
 
-export default UpdateAdventure;
+export default AdventureDetail;
 export { SINGLE_ADVENTURE_QUERY, UPDATE_ADVENTURE_MUTATION };

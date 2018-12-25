@@ -2,8 +2,19 @@ import React, { Component } from 'react';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import gql from 'graphql-tag';
+import { Mutation } from 'react-apollo';
+import { ALL_ADVENTURES_QUERY } from './AdventuresList';
 import formatDate from '../lib/formatDate';
-import { ButtonAnchor } from '../components/styles/Button';
+import Button, { ButtonAnchor } from '../components/styles/Button';
+
+const DELETE_ADVENTURE_MUTATION = gql`
+  mutation DELETE_ADVENTURE_MUTATION($id: ID!) {
+    deleteAdventure(id: $id) {
+      id
+    }
+  }
+`;
 
 const AdventureStyles = styled.div`
   display: flex;
@@ -72,6 +83,19 @@ const AdventureStyles = styled.div`
 `;
 
 class Adventure extends Component {
+  // Manually update the cache on the client,
+  // matching the server
+  update = (cache, payload) => {
+    // Read the cache
+    const data = cache.readQuery({ query: ALL_ADVENTURES_QUERY });
+    // Filter items that are still in the data
+    data.adventures = data.adventures.filter(
+      adventure => adventure.id !== payload.data.deleteAdventure.id
+    );
+    // Put the items back
+    cache.writeQuery({ query: ALL_ADVENTURES_QUERY, data });
+  };
+
   render() {
     const {
       id,
@@ -130,14 +154,27 @@ class Adventure extends Component {
               <ButtonAnchor>View 👀</ButtonAnchor>
             </Link>
           )}
-          <Link
-            href={{
-              pathname: '/adventure',
-              query: { id: id }
-            }}
+          <Mutation
+            mutation={DELETE_ADVENTURE_MUTATION}
+            variables={{ id: id }}
+            update={this.update}
           >
-            <ButtonAnchor>Delete 🗑</ButtonAnchor>
-          </Link>
+            {(deleteAdventure, { error, loading }) => {
+              return (
+                <Button
+                  onClick={() => {
+                    if (
+                      confirm('Are you sure you want to delete this adventure?')
+                    ) {
+                      deleteAdventure();
+                    }
+                  }}
+                >
+                  Delete 🗑
+                </Button>
+              );
+            }}
+          </Mutation>
         </div>
       </AdventureStyles>
     );
@@ -155,3 +192,4 @@ Adventure.propTypes = {
 };
 
 export default Adventure;
+export { DELETE_ADVENTURE_MUTATION };

@@ -4,6 +4,7 @@ import { Mutation } from 'react-apollo';
 import Router from 'next/router';
 import Form from './styles/Form';
 import Error from './ErrorMessage';
+import Button from '../components/styles/Button';
 
 const CREATE_ADVENTURE_MUTATION = gql`
   mutation CREATE_ADVENTURE_MUTATION($title: String!, $act: Int, $page: Int) {
@@ -38,9 +39,10 @@ class CreateAdventure extends Component {
               e.preventDefault();
               // Call the mutation
               const res = await createAdventure();
+
               // Redirect to single page with given id
               Router.push({
-                pathname: 'adventure',
+                pathname: '/adventure',
                 query: { id: res.data.createAdventure.id }
               });
             }}
@@ -80,7 +82,7 @@ class CreateAdventure extends Component {
                   onChange={this.handleChange}
                 />
               </label>
-              <button type="submit">Begin adventure! 🏃‍</button>
+              <Button type="submit">Begin adventure! 🏃‍</Button>
             </fieldset>
           </Form>
         )}

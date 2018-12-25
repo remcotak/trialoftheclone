@@ -83,7 +83,7 @@ class Page extends Component {
       <ThemeProvider theme={theme}>
         <React.Fragment>
           <GlobalStyle />
-          <Meta />
+          <Meta componentName={this.props.componentName} />
           <Header />
           <InnerPage>{this.props.children}</InnerPage>
         </React.Fragment>

@@ -15,11 +15,12 @@ class MyApp extends App {
   }
   render() {
     const { Component, apollo, pageProps } = this.props;
+    console.log(this.props.Component.name);
 
     return (
       <Container>
         <ApolloProvider client={apollo}>
-          <Page>
+          <Page componentName={this.props.Component.name}>
             <Component {...pageProps} />
           </Page>
         </ApolloProvider>

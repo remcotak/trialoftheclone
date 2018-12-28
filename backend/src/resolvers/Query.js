@@ -12,7 +12,8 @@ const Query = {
   // },
   users: forwardTo('db'),
   adventures: forwardTo('db'),
-  adventure: forwardTo('db')
+  adventure: forwardTo('db'),
+  adventuresConnection: forwardTo('db')
 };
 
 module.exports = Query;

@@ -12,7 +12,7 @@ const AdventuresStyles = styled.div`
   }
 `;
 
-const Adventures = () => (
+const Adventures = ({ query }) => (
   <AdventuresStyles>
     <div className="adventures__header">
       <h1>Your adventures 🎒</h1>
@@ -20,7 +20,7 @@ const Adventures = () => (
         <ButtonAnchor>Start new adventure 👊</ButtonAnchor>
       </Link>
     </div>
-    <AdventuresList />
+    <AdventuresList page={parseFloat(query.page) || 1} />
   </AdventuresStyles>
 );
 

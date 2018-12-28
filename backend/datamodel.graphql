@@ -13,6 +13,12 @@ type Adventure {
   isAlive: Boolean! @default(value: "true")
   act: Int! @default(value: 1)
   page: Int! @default(value: 1)
+  healthPoints: Int! @default(value: 0)
+  maxHealthPoints: Int! @default(value: 20)
+  charisma: Int! @default(value: 0)
+  fighting: Int! @default(value: 1)
+  wits: Int! @default(value: 0)
+  weapons: [Weapon]
   # user: User!
   # aspects: [Aspect]
   # inventory: [Item]
@@ -29,16 +35,6 @@ type Item {
   id: ID! @unique
   title: String!
   effect: String!
-}
-
-type Stats {
-  id: ID! @unique
-  healthPoints: Int! @default(value: 0)
-  maxHealthPoints: Int! @default(value: 20)
-  charisma: Int! @default(value: 0)
-  fighting: Int! @default(value: 1)
-  wits: Int! @default(value: 0)
-  weapons: [Weapon]
 }
 
 type Weapon {

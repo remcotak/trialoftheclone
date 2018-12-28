@@ -9,6 +9,15 @@ type Mutation {
 
 type Query {
   users: [User]!
-  adventures: [Adventure]!
+  adventures(
+    where: AdventureWhereInput
+    orderBy: AdventureOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Adventure]!
   adventure(where: AdventureWhereUniqueInput!): Adventure!
+  adventuresConnection(where: AdventureWhereInput): AdventureConnection!
 }

@@ -6,7 +6,7 @@ import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 import { ALL_ADVENTURES_QUERY } from './AdventuresList';
 import formatDate from '../lib/formatDate';
-import Button, { ButtonAnchor } from '../components/styles/Button';
+import Button, { ButtonAnchor } from './styles/Button';
 
 const DELETE_ADVENTURE_MUTATION = gql`
   mutation DELETE_ADVENTURE_MUTATION($id: ID!) {
@@ -16,11 +16,13 @@ const DELETE_ADVENTURE_MUTATION = gql`
   }
 `;
 
-const AdventureStyles = styled.div`
+const AdventureListItemStyles = styled.div`
   display: flex;
   flex-direction: column;
   box-shadow: ${props => props.theme.bs};
-  border-top: 4px solid ${props => props.theme.secondary};
+  border-top: 4px solid;
+  border-color: ${props =>
+    props.isAlive ? `${props.theme.secondary}` : `${props.theme.gray}`};
 
   .adventure__container {
     display: flex;
@@ -82,7 +84,7 @@ const AdventureStyles = styled.div`
   }
 `;
 
-class Adventure extends Component {
+class AdventureListItem extends Component {
   // Manually update the cache on the client,
   // matching the server
   update = (cache, payload) => {
@@ -108,7 +110,7 @@ class Adventure extends Component {
     } = this.props.adventure;
 
     return (
-      <AdventureStyles>
+      <AdventureListItemStyles isAlive={isAlive}>
         <div className="adventure__container">
           <div className="adventure__header">
             <Link
@@ -176,12 +178,12 @@ class Adventure extends Component {
             }}
           </Mutation>
         </div>
-      </AdventureStyles>
+      </AdventureListItemStyles>
     );
   }
 }
 
-Adventure.propTypes = {
+AdventureListItem.propTypes = {
   adventure: PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
@@ -191,5 +193,5 @@ Adventure.propTypes = {
   })
 };
 
-export default Adventure;
+export default AdventureListItem;
 export { DELETE_ADVENTURE_MUTATION };

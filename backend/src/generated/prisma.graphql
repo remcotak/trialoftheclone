@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/remco-tak-12c628/trails-of-the-clone/dev
-# timestamp: Mon Dec 24 2018 13:49:15 GMT+0100 (Central European Standard Time)
+# timestamp: Tue Dec 25 2018 17:08:25 GMT+0100 (Central European Standard Time)
 
 type Adventure implements Node {
   id: ID!
@@ -9,6 +9,12 @@ type Adventure implements Node {
   isAlive: Boolean!
   act: Int!
   page: Int!
+  healthPoints: Int!
+  maxHealthPoints: Int!
+  charisma: Int!
+  fighting: Int!
+  wits: Int!
+  weapons(where: WeaponWhereInput, orderBy: WeaponOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Weapon!]
 }
 
 """A connection to a list of items."""
@@ -26,6 +32,12 @@ input AdventureCreateInput {
   isAlive: Boolean
   act: Int
   page: Int
+  healthPoints: Int
+  maxHealthPoints: Int
+  charisma: Int
+  fighting: Int
+  wits: Int
+  weapons: WeaponCreateManyInput
 }
 
 input AdventureCreateManyInput {
@@ -57,6 +69,16 @@ enum AdventureOrderByInput {
   act_DESC
   page_ASC
   page_DESC
+  healthPoints_ASC
+  healthPoints_DESC
+  maxHealthPoints_ASC
+  maxHealthPoints_DESC
+  charisma_ASC
+  charisma_DESC
+  fighting_ASC
+  fighting_DESC
+  wits_ASC
+  wits_DESC
 }
 
 type AdventurePreviousValues {
@@ -67,6 +89,11 @@ type AdventurePreviousValues {
   isAlive: Boolean!
   act: Int!
   page: Int!
+  healthPoints: Int!
+  maxHealthPoints: Int!
+  charisma: Int!
+  fighting: Int!
+  wits: Int!
 }
 
 input AdventureScalarWhereInput {
@@ -250,6 +277,116 @@ input AdventureScalarWhereInput {
 
   """All values greater than or equal the given value."""
   page_gte: Int
+  healthPoints: Int
+
+  """All values that are not equal to given value."""
+  healthPoints_not: Int
+
+  """All values that are contained in given list."""
+  healthPoints_in: [Int!]
+
+  """All values that are not contained in given list."""
+  healthPoints_not_in: [Int!]
+
+  """All values less than the given value."""
+  healthPoints_lt: Int
+
+  """All values less than or equal the given value."""
+  healthPoints_lte: Int
+
+  """All values greater than the given value."""
+  healthPoints_gt: Int
+
+  """All values greater than or equal the given value."""
+  healthPoints_gte: Int
+  maxHealthPoints: Int
+
+  """All values that are not equal to given value."""
+  maxHealthPoints_not: Int
+
+  """All values that are contained in given list."""
+  maxHealthPoints_in: [Int!]
+
+  """All values that are not contained in given list."""
+  maxHealthPoints_not_in: [Int!]
+
+  """All values less than the given value."""
+  maxHealthPoints_lt: Int
+
+  """All values less than or equal the given value."""
+  maxHealthPoints_lte: Int
+
+  """All values greater than the given value."""
+  maxHealthPoints_gt: Int
+
+  """All values greater than or equal the given value."""
+  maxHealthPoints_gte: Int
+  charisma: Int
+
+  """All values that are not equal to given value."""
+  charisma_not: Int
+
+  """All values that are contained in given list."""
+  charisma_in: [Int!]
+
+  """All values that are not contained in given list."""
+  charisma_not_in: [Int!]
+
+  """All values less than the given value."""
+  charisma_lt: Int
+
+  """All values less than or equal the given value."""
+  charisma_lte: Int
+
+  """All values greater than the given value."""
+  charisma_gt: Int
+
+  """All values greater than or equal the given value."""
+  charisma_gte: Int
+  fighting: Int
+
+  """All values that are not equal to given value."""
+  fighting_not: Int
+
+  """All values that are contained in given list."""
+  fighting_in: [Int!]
+
+  """All values that are not contained in given list."""
+  fighting_not_in: [Int!]
+
+  """All values less than the given value."""
+  fighting_lt: Int
+
+  """All values less than or equal the given value."""
+  fighting_lte: Int
+
+  """All values greater than the given value."""
+  fighting_gt: Int
+
+  """All values greater than or equal the given value."""
+  fighting_gte: Int
+  wits: Int
+
+  """All values that are not equal to given value."""
+  wits_not: Int
+
+  """All values that are contained in given list."""
+  wits_in: [Int!]
+
+  """All values that are not contained in given list."""
+  wits_not_in: [Int!]
+
+  """All values less than the given value."""
+  wits_lt: Int
+
+  """All values less than or equal the given value."""
+  wits_lte: Int
+
+  """All values greater than the given value."""
+  wits_gt: Int
+
+  """All values greater than or equal the given value."""
+  wits_gte: Int
 }
 
 type AdventureSubscriptionPayload {
@@ -296,6 +433,12 @@ input AdventureUpdateDataInput {
   isAlive: Boolean
   act: Int
   page: Int
+  healthPoints: Int
+  maxHealthPoints: Int
+  charisma: Int
+  fighting: Int
+  wits: Int
+  weapons: WeaponUpdateManyInput
 }
 
 input AdventureUpdateInput {
@@ -303,6 +446,12 @@ input AdventureUpdateInput {
   isAlive: Boolean
   act: Int
   page: Int
+  healthPoints: Int
+  maxHealthPoints: Int
+  charisma: Int
+  fighting: Int
+  wits: Int
+  weapons: WeaponUpdateManyInput
 }
 
 input AdventureUpdateManyDataInput {
@@ -310,6 +459,11 @@ input AdventureUpdateManyDataInput {
   isAlive: Boolean
   act: Int
   page: Int
+  healthPoints: Int
+  maxHealthPoints: Int
+  charisma: Int
+  fighting: Int
+  wits: Int
 }
 
 input AdventureUpdateManyInput {
@@ -328,6 +482,11 @@ input AdventureUpdateManyMutationInput {
   isAlive: Boolean
   act: Int
   page: Int
+  healthPoints: Int
+  maxHealthPoints: Int
+  charisma: Int
+  fighting: Int
+  wits: Int
 }
 
 input AdventureUpdateManyWithWhereNestedInput {
@@ -527,6 +686,119 @@ input AdventureWhereInput {
 
   """All values greater than or equal the given value."""
   page_gte: Int
+  healthPoints: Int
+
+  """All values that are not equal to given value."""
+  healthPoints_not: Int
+
+  """All values that are contained in given list."""
+  healthPoints_in: [Int!]
+
+  """All values that are not contained in given list."""
+  healthPoints_not_in: [Int!]
+
+  """All values less than the given value."""
+  healthPoints_lt: Int
+
+  """All values less than or equal the given value."""
+  healthPoints_lte: Int
+
+  """All values greater than the given value."""
+  healthPoints_gt: Int
+
+  """All values greater than or equal the given value."""
+  healthPoints_gte: Int
+  maxHealthPoints: Int
+
+  """All values that are not equal to given value."""
+  maxHealthPoints_not: Int
+
+  """All values that are contained in given list."""
+  maxHealthPoints_in: [Int!]
+
+  """All values that are not contained in given list."""
+  maxHealthPoints_not_in: [Int!]
+
+  """All values less than the given value."""
+  maxHealthPoints_lt: Int
+
+  """All values less than or equal the given value."""
+  maxHealthPoints_lte: Int
+
+  """All values greater than the given value."""
+  maxHealthPoints_gt: Int
+
+  """All values greater than or equal the given value."""
+  maxHealthPoints_gte: Int
+  charisma: Int
+
+  """All values that are not equal to given value."""
+  charisma_not: Int
+
+  """All values that are contained in given list."""
+  charisma_in: [Int!]
+
+  """All values that are not contained in given list."""
+  charisma_not_in: [Int!]
+
+  """All values less than the given value."""
+  charisma_lt: Int
+
+  """All values less than or equal the given value."""
+  charisma_lte: Int
+
+  """All values greater than the given value."""
+  charisma_gt: Int
+
+  """All values greater than or equal the given value."""
+  charisma_gte: Int
+  fighting: Int
+
+  """All values that are not equal to given value."""
+  fighting_not: Int
+
+  """All values that are contained in given list."""
+  fighting_in: [Int!]
+
+  """All values that are not contained in given list."""
+  fighting_not_in: [Int!]
+
+  """All values less than the given value."""
+  fighting_lt: Int
+
+  """All values less than or equal the given value."""
+  fighting_lte: Int
+
+  """All values greater than the given value."""
+  fighting_gt: Int
+
+  """All values greater than or equal the given value."""
+  fighting_gte: Int
+  wits: Int
+
+  """All values that are not equal to given value."""
+  wits_not: Int
+
+  """All values that are contained in given list."""
+  wits_in: [Int!]
+
+  """All values that are not contained in given list."""
+  wits_not_in: [Int!]
+
+  """All values less than the given value."""
+  wits_lt: Int
+
+  """All values less than or equal the given value."""
+  wits_lte: Int
+
+  """All values greater than the given value."""
+  wits_gt: Int
+
+  """All values greater than or equal the given value."""
+  wits_gte: Int
+  weapons_every: WeaponWhereInput
+  weapons_some: WeaponWhereInput
+  weapons_none: WeaponWhereInput
 }
 
 input AdventureWhereUniqueInput {
@@ -542,10 +814,6 @@ type AggregateAspect {
 }
 
 type AggregateItem {
-  count: Int!
-}
-
-type AggregateStats {
   count: Int!
 }
 
@@ -1040,37 +1308,31 @@ type Mutation {
   createUser(data: UserCreateInput!): User!
   createAspect(data: AspectCreateInput!): Aspect!
   createItem(data: ItemCreateInput!): Item!
-  createStats(data: StatsCreateInput!): Stats!
   createWeapon(data: WeaponCreateInput!): Weapon!
   createAdventure(data: AdventureCreateInput!): Adventure!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateAspect(data: AspectUpdateInput!, where: AspectWhereUniqueInput!): Aspect
   updateItem(data: ItemUpdateInput!, where: ItemWhereUniqueInput!): Item
-  updateStats(data: StatsUpdateInput!, where: StatsWhereUniqueInput!): Stats
   updateWeapon(data: WeaponUpdateInput!, where: WeaponWhereUniqueInput!): Weapon
   updateAdventure(data: AdventureUpdateInput!, where: AdventureWhereUniqueInput!): Adventure
   deleteUser(where: UserWhereUniqueInput!): User
   deleteAspect(where: AspectWhereUniqueInput!): Aspect
   deleteItem(where: ItemWhereUniqueInput!): Item
-  deleteStats(where: StatsWhereUniqueInput!): Stats
   deleteWeapon(where: WeaponWhereUniqueInput!): Weapon
   deleteAdventure(where: AdventureWhereUniqueInput!): Adventure
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertAspect(where: AspectWhereUniqueInput!, create: AspectCreateInput!, update: AspectUpdateInput!): Aspect!
   upsertItem(where: ItemWhereUniqueInput!, create: ItemCreateInput!, update: ItemUpdateInput!): Item!
-  upsertStats(where: StatsWhereUniqueInput!, create: StatsCreateInput!, update: StatsUpdateInput!): Stats!
   upsertWeapon(where: WeaponWhereUniqueInput!, create: WeaponCreateInput!, update: WeaponUpdateInput!): Weapon!
   upsertAdventure(where: AdventureWhereUniqueInput!, create: AdventureCreateInput!, update: AdventureUpdateInput!): Adventure!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   updateManyAspects(data: AspectUpdateManyMutationInput!, where: AspectWhereInput): BatchPayload!
   updateManyItems(data: ItemUpdateManyMutationInput!, where: ItemWhereInput): BatchPayload!
-  updateManyStatses(data: StatsUpdateManyMutationInput!, where: StatsWhereInput): BatchPayload!
   updateManyWeapons(data: WeaponUpdateManyMutationInput!, where: WeaponWhereInput): BatchPayload!
   updateManyAdventures(data: AdventureUpdateManyMutationInput!, where: AdventureWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyAspects(where: AspectWhereInput): BatchPayload!
   deleteManyItems(where: ItemWhereInput): BatchPayload!
-  deleteManyStatses(where: StatsWhereInput): BatchPayload!
   deleteManyWeapons(where: WeaponWhereInput): BatchPayload!
   deleteManyAdventures(where: AdventureWhereInput): BatchPayload!
 }
@@ -1106,19 +1368,16 @@ type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   aspects(where: AspectWhereInput, orderBy: AspectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Aspect]!
   items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item]!
-  statses(where: StatsWhereInput, orderBy: StatsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Stats]!
   weapons(where: WeaponWhereInput, orderBy: WeaponOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Weapon]!
   adventures(where: AdventureWhereInput, orderBy: AdventureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Adventure]!
   user(where: UserWhereUniqueInput!): User
   aspect(where: AspectWhereUniqueInput!): Aspect
   item(where: ItemWhereUniqueInput!): Item
-  stats(where: StatsWhereUniqueInput!): Stats
   weapon(where: WeaponWhereUniqueInput!): Weapon
   adventure(where: AdventureWhereUniqueInput!): Adventure
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   aspectsConnection(where: AspectWhereInput, orderBy: AspectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AspectConnection!
   itemsConnection(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ItemConnection!
-  statsesConnection(where: StatsWhereInput, orderBy: StatsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StatsConnection!
   weaponsConnection(where: WeaponWhereInput, orderBy: WeaponOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): WeaponConnection!
   adventuresConnection(where: AdventureWhereInput, orderBy: AdventureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AdventureConnection!
 
@@ -1129,301 +1388,10 @@ type Query {
   ): Node
 }
 
-type Stats implements Node {
-  id: ID!
-  healthPoints: Int!
-  maxHealthPoints: Int!
-  charisma: Int!
-  fighting: Int!
-  wits: Int!
-  weapons(where: WeaponWhereInput, orderBy: WeaponOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Weapon!]
-}
-
-"""A connection to a list of items."""
-type StatsConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [StatsEdge]!
-  aggregate: AggregateStats!
-}
-
-input StatsCreateInput {
-  healthPoints: Int
-  maxHealthPoints: Int
-  charisma: Int
-  fighting: Int
-  wits: Int
-  weapons: WeaponCreateManyInput
-}
-
-"""An edge in a connection."""
-type StatsEdge {
-  """The item at the end of the edge."""
-  node: Stats!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum StatsOrderByInput {
-  id_ASC
-  id_DESC
-  healthPoints_ASC
-  healthPoints_DESC
-  maxHealthPoints_ASC
-  maxHealthPoints_DESC
-  charisma_ASC
-  charisma_DESC
-  fighting_ASC
-  fighting_DESC
-  wits_ASC
-  wits_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
-}
-
-type StatsPreviousValues {
-  id: ID!
-  healthPoints: Int!
-  maxHealthPoints: Int!
-  charisma: Int!
-  fighting: Int!
-  wits: Int!
-}
-
-type StatsSubscriptionPayload {
-  mutation: MutationType!
-  node: Stats
-  updatedFields: [String!]
-  previousValues: StatsPreviousValues
-}
-
-input StatsSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [StatsSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [StatsSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [StatsSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: StatsWhereInput
-}
-
-input StatsUpdateInput {
-  healthPoints: Int
-  maxHealthPoints: Int
-  charisma: Int
-  fighting: Int
-  wits: Int
-  weapons: WeaponUpdateManyInput
-}
-
-input StatsUpdateManyMutationInput {
-  healthPoints: Int
-  maxHealthPoints: Int
-  charisma: Int
-  fighting: Int
-  wits: Int
-}
-
-input StatsWhereInput {
-  """Logical AND on all given filters."""
-  AND: [StatsWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [StatsWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [StatsWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  healthPoints: Int
-
-  """All values that are not equal to given value."""
-  healthPoints_not: Int
-
-  """All values that are contained in given list."""
-  healthPoints_in: [Int!]
-
-  """All values that are not contained in given list."""
-  healthPoints_not_in: [Int!]
-
-  """All values less than the given value."""
-  healthPoints_lt: Int
-
-  """All values less than or equal the given value."""
-  healthPoints_lte: Int
-
-  """All values greater than the given value."""
-  healthPoints_gt: Int
-
-  """All values greater than or equal the given value."""
-  healthPoints_gte: Int
-  maxHealthPoints: Int
-
-  """All values that are not equal to given value."""
-  maxHealthPoints_not: Int
-
-  """All values that are contained in given list."""
-  maxHealthPoints_in: [Int!]
-
-  """All values that are not contained in given list."""
-  maxHealthPoints_not_in: [Int!]
-
-  """All values less than the given value."""
-  maxHealthPoints_lt: Int
-
-  """All values less than or equal the given value."""
-  maxHealthPoints_lte: Int
-
-  """All values greater than the given value."""
-  maxHealthPoints_gt: Int
-
-  """All values greater than or equal the given value."""
-  maxHealthPoints_gte: Int
-  charisma: Int
-
-  """All values that are not equal to given value."""
-  charisma_not: Int
-
-  """All values that are contained in given list."""
-  charisma_in: [Int!]
-
-  """All values that are not contained in given list."""
-  charisma_not_in: [Int!]
-
-  """All values less than the given value."""
-  charisma_lt: Int
-
-  """All values less than or equal the given value."""
-  charisma_lte: Int
-
-  """All values greater than the given value."""
-  charisma_gt: Int
-
-  """All values greater than or equal the given value."""
-  charisma_gte: Int
-  fighting: Int
-
-  """All values that are not equal to given value."""
-  fighting_not: Int
-
-  """All values that are contained in given list."""
-  fighting_in: [Int!]
-
-  """All values that are not contained in given list."""
-  fighting_not_in: [Int!]
-
-  """All values less than the given value."""
-  fighting_lt: Int
-
-  """All values less than or equal the given value."""
-  fighting_lte: Int
-
-  """All values greater than the given value."""
-  fighting_gt: Int
-
-  """All values greater than or equal the given value."""
-  fighting_gte: Int
-  wits: Int
-
-  """All values that are not equal to given value."""
-  wits_not: Int
-
-  """All values that are contained in given list."""
-  wits_in: [Int!]
-
-  """All values that are not contained in given list."""
-  wits_not_in: [Int!]
-
-  """All values less than the given value."""
-  wits_lt: Int
-
-  """All values less than or equal the given value."""
-  wits_lte: Int
-
-  """All values greater than the given value."""
-  wits_gt: Int
-
-  """All values greater than or equal the given value."""
-  wits_gte: Int
-  weapons_every: WeaponWhereInput
-  weapons_some: WeaponWhereInput
-  weapons_none: WeaponWhereInput
-}
-
-input StatsWhereUniqueInput {
-  id: ID
-}
-
 type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   aspect(where: AspectSubscriptionWhereInput): AspectSubscriptionPayload
   item(where: ItemSubscriptionWhereInput): ItemSubscriptionPayload
-  stats(where: StatsSubscriptionWhereInput): StatsSubscriptionPayload
   weapon(where: WeaponSubscriptionWhereInput): WeaponSubscriptionPayload
   adventure(where: AdventureSubscriptionWhereInput): AdventureSubscriptionPayload
 }

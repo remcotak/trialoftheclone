@@ -72,6 +72,12 @@ const Form = styled.form`
       border-color: ${props => props.theme.primary};
     }
   }
+
+  .form__group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-gap: ${props => props.theme.spacingBase};
+  }
 `;
 
 export default Form;

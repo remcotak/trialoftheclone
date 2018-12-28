@@ -18,9 +18,9 @@ const sharedStyle = css`
     position: absolute;
     display: block;
     top: 0;
-    right: 100%;
+    right: ${props => (props.animationReversed ? '0' : '100%')};
     bottom: 0;
-    left: 0;
+    left: ${props => (props.animationReversed ? '100%' : '0')};
     background-color: ${props => props.theme.primary};
     z-index: -1;
     transition: all 0.1s ease-in;
@@ -30,7 +30,13 @@ const sharedStyle = css`
   &:focus {
     &::after {
       right: 0;
+      left: 0;
     }
+  }
+
+  &[aria-disabled='true'] {
+    color: ${props => props.theme.gray};
+    pointer-events: none;
   }
 `;
 

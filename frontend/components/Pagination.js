@@ -58,7 +58,7 @@ const Pagination = props => (
               aria-disabled={page <= 1}
               animationReversed
             >
-              ← Prev
+              👈 Prev
             </ButtonAnchor>
           </Link>
           <p className="pagination__count">
@@ -72,7 +72,7 @@ const Pagination = props => (
             }}
           >
             <ButtonAnchor className="prev" aria-disabled={page >= pages}>
-              Next →
+              Next 👉
             </ButtonAnchor>
           </Link>
         </PaginationStyles>

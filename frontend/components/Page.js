@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import Header from './Header';
 import Meta from './Meta';
@@ -81,12 +81,12 @@ class Page extends Component {
   render() {
     return (
       <ThemeProvider theme={theme}>
-        <React.Fragment>
+        <Fragment>
           <GlobalStyle />
           <Meta />
           <Header />
           <InnerPage>{this.props.children}</InnerPage>
-        </React.Fragment>
+        </Fragment>
       </ThemeProvider>
     );
   }

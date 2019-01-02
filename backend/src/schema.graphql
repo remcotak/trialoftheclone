@@ -1,14 +1,19 @@
 # import * from './generated/prisma.graphql'
 
+type SuccessMessage {
+  message: String
+}
+
 type Mutation {
-  createUser(name: String!): User!
+  signUp(email: String!, password: String!, name: String!): User!
+  signIn(email: String!, password: String!): User!
+  signOut: SuccessMessage
   createAdventure(title: String!, act: Int, page: Int): Adventure!
   updateAdventure(id: ID!, title: String, act: Int, page: Int): Adventure!
   deleteAdventure(id: ID!): Adventure
 }
 
 type Query {
-  users: [User]!
   adventures(
     where: AdventureWhereInput
     orderBy: AdventureOrderByInput
@@ -20,4 +25,5 @@ type Query {
   ): [Adventure]!
   adventure(where: AdventureWhereUniqueInput!): Adventure!
   adventuresConnection(where: AdventureWhereInput): AdventureConnection!
+  me: User
 }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import AdventureListItem from './AdventureListItem';
@@ -47,7 +47,7 @@ class AdventuresList extends Component {
             return <p>No adventure started yet 🤷‍♂️</p>;
 
           return (
-            <React.Fragment>
+            <Fragment>
               <Pagination page={this.props.page} />
               <AdventuresListStyles>
                 {data.adventures.map(adventure => (
@@ -55,7 +55,7 @@ class AdventuresList extends Component {
                 ))}
               </AdventuresListStyles>
               <Pagination page={this.props.page} />
-            </React.Fragment>
+            </Fragment>
           );
         }}
       </Query>

@@ -1,10 +1,11 @@
 import CreateAdventure from '../components/CreateAdventure';
+import AuthUser from '../components/AuthUser';
 
 const Adventure = () => (
-  <div>
+  <AuthUser>
     <h1>A new adventure awaits 🌈</h1>
     <CreateAdventure />
-  </div>
+  </AuthUser>
 );
 
 export default Adventure;

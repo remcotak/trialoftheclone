@@ -1,10 +1,11 @@
 import AdventureDetail from '../components/AdventureDetail';
+import AuthUser from '../components/AuthUser';
 
 const Adventure = ({ query }) => (
-  <div>
+  <AuthUser>
     <h1>Adventure time! 🏞</h1>
     <AdventureDetail id={query.id} />
-  </div>
+  </AuthUser>
 );
 
 export default Adventure;

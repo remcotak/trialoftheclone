@@ -84,7 +84,7 @@ class AdventureDetail extends Component {
         {({ data, error, loading }) => {
           if (loading) return <p>Loading...</p>;
           if (!data.adventure) return <p>Sorry, no adventure found 😢</p>;
-          // if (error) return <p>Error: {error.message}</p>;
+          if (error) return <p>Error: {error.message}</p>;
 
           return (
             <Mutation

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 import Router from 'next/router';
+import { ALL_ADVENTURES_QUERY } from './AdventuresList';
 import Form from './styles/Form';
 import Error from './ErrorMessage';
 import Button from '../components/styles/Button';
@@ -10,6 +11,12 @@ const CREATE_ADVENTURE_MUTATION = gql`
   mutation CREATE_ADVENTURE_MUTATION($title: String!, $act: Int, $page: Int) {
     createAdventure(title: $title, act: $act, page: $page) {
       id
+      title
+      act
+      page
+      isAlive
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -29,9 +36,25 @@ class CreateAdventure extends Component {
     });
   };
 
+  // Manually update the cache on the client,
+  // matching the server
+  update = (cache, payload) => {
+    // Read the cache
+    const data = cache.readQuery({ query: ALL_ADVENTURES_QUERY });
+    // Put the new adventure in the adventures array
+    cache.writeQuery({
+      query: ALL_ADVENTURES_QUERY,
+      data: { adventures: [payload.data.createAdventure, ...data.adventures] }
+    });
+  };
+
   render() {
     return (
-      <Mutation mutation={CREATE_ADVENTURE_MUTATION} variables={this.state}>
+      <Mutation
+        mutation={CREATE_ADVENTURE_MUTATION}
+        variables={this.state}
+        update={this.update}
+      >
         {(createAdventure, { error, loading }) => (
           <Form
             onSubmit={async e => {

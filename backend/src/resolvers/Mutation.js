@@ -3,9 +3,21 @@ const jwt = require('jsonwebtoken');
 
 const Mutations = {
   async createAdventure(parent, args, ctx, info) {
+    if (!ctx.request.userId) {
+      throw new Error('You must be logged in to do that!');
+    }
+
     const adventure = await ctx.db.mutation.createAdventure(
       {
-        data: { ...args }
+        data: {
+          // This is how to create a relationship between the Item and the User
+          user: {
+            connect: {
+              id: ctx.request.userId
+            }
+          },
+          ...args
+        }
       },
       info
     );
@@ -33,9 +45,14 @@ const Mutations = {
   async deleteAdventure(parent, args, ctx, info) {
     const where = { id: args.id };
     // Find the adventure
-    const adventure = await ctx.db.query.adventure({ where }, `{ id title}`);
+    const adventure = await ctx.db.query.adventure(
+      { where },
+      `{ id title user { id } }`
+    );
     // Check if user has permission to delete the adventure
-    // TODO:
+    if (adventure.user.id !== ctx.request.userId) {
+      throw new Error('You do not have the permission to delete this item!');
+    }
     // Delete the adventure
     return ctx.db.mutation.deleteAdventure({ where }, info);
   },

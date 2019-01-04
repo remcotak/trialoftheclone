@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/remco-tak-12c628/trails-of-the-clone/dev
-# timestamp: Wed Jan 02 2019 13:16:01 GMT+0100 (Central European Standard Time)
+# timestamp: Fri Jan 04 2019 09:10:04 GMT+0100 (Central European Standard Time)
 
 type Adventure implements Node {
   id: ID!
@@ -15,6 +15,7 @@ type Adventure implements Node {
   fighting: Int!
   wits: Int!
   weapons(where: WeaponWhereInput, orderBy: WeaponOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Weapon!]
+  user: User!
 }
 
 """A connection to a list of items."""
@@ -38,11 +39,7 @@ input AdventureCreateInput {
   fighting: Int
   wits: Int
   weapons: WeaponCreateManyInput
-}
-
-input AdventureCreateManyInput {
-  create: [AdventureCreateInput!]
-  connect: [AdventureWhereUniqueInput!]
+  user: UserCreateOneInput!
 }
 
 """An edge in a connection."""
@@ -96,299 +93,6 @@ type AdventurePreviousValues {
   wits: Int!
 }
 
-input AdventureScalarWhereInput {
-  """Logical AND on all given filters."""
-  AND: [AdventureScalarWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [AdventureScalarWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [AdventureScalarWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  title: String
-
-  """All values that are not equal to given value."""
-  title_not: String
-
-  """All values that are contained in given list."""
-  title_in: [String!]
-
-  """All values that are not contained in given list."""
-  title_not_in: [String!]
-
-  """All values less than the given value."""
-  title_lt: String
-
-  """All values less than or equal the given value."""
-  title_lte: String
-
-  """All values greater than the given value."""
-  title_gt: String
-
-  """All values greater than or equal the given value."""
-  title_gte: String
-
-  """All values containing the given string."""
-  title_contains: String
-
-  """All values not containing the given string."""
-  title_not_contains: String
-
-  """All values starting with the given string."""
-  title_starts_with: String
-
-  """All values not starting with the given string."""
-  title_not_starts_with: String
-
-  """All values ending with the given string."""
-  title_ends_with: String
-
-  """All values not ending with the given string."""
-  title_not_ends_with: String
-  createdAt: DateTime
-
-  """All values that are not equal to given value."""
-  createdAt_not: DateTime
-
-  """All values that are contained in given list."""
-  createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  createdAt_lte: DateTime
-
-  """All values greater than the given value."""
-  createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-
-  """All values that are not equal to given value."""
-  updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
-  updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
-  updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  updatedAt_gte: DateTime
-  isAlive: Boolean
-
-  """All values that are not equal to given value."""
-  isAlive_not: Boolean
-  act: Int
-
-  """All values that are not equal to given value."""
-  act_not: Int
-
-  """All values that are contained in given list."""
-  act_in: [Int!]
-
-  """All values that are not contained in given list."""
-  act_not_in: [Int!]
-
-  """All values less than the given value."""
-  act_lt: Int
-
-  """All values less than or equal the given value."""
-  act_lte: Int
-
-  """All values greater than the given value."""
-  act_gt: Int
-
-  """All values greater than or equal the given value."""
-  act_gte: Int
-  page: Int
-
-  """All values that are not equal to given value."""
-  page_not: Int
-
-  """All values that are contained in given list."""
-  page_in: [Int!]
-
-  """All values that are not contained in given list."""
-  page_not_in: [Int!]
-
-  """All values less than the given value."""
-  page_lt: Int
-
-  """All values less than or equal the given value."""
-  page_lte: Int
-
-  """All values greater than the given value."""
-  page_gt: Int
-
-  """All values greater than or equal the given value."""
-  page_gte: Int
-  healthPoints: Int
-
-  """All values that are not equal to given value."""
-  healthPoints_not: Int
-
-  """All values that are contained in given list."""
-  healthPoints_in: [Int!]
-
-  """All values that are not contained in given list."""
-  healthPoints_not_in: [Int!]
-
-  """All values less than the given value."""
-  healthPoints_lt: Int
-
-  """All values less than or equal the given value."""
-  healthPoints_lte: Int
-
-  """All values greater than the given value."""
-  healthPoints_gt: Int
-
-  """All values greater than or equal the given value."""
-  healthPoints_gte: Int
-  maxHealthPoints: Int
-
-  """All values that are not equal to given value."""
-  maxHealthPoints_not: Int
-
-  """All values that are contained in given list."""
-  maxHealthPoints_in: [Int!]
-
-  """All values that are not contained in given list."""
-  maxHealthPoints_not_in: [Int!]
-
-  """All values less than the given value."""
-  maxHealthPoints_lt: Int
-
-  """All values less than or equal the given value."""
-  maxHealthPoints_lte: Int
-
-  """All values greater than the given value."""
-  maxHealthPoints_gt: Int
-
-  """All values greater than or equal the given value."""
-  maxHealthPoints_gte: Int
-  charisma: Int
-
-  """All values that are not equal to given value."""
-  charisma_not: Int
-
-  """All values that are contained in given list."""
-  charisma_in: [Int!]
-
-  """All values that are not contained in given list."""
-  charisma_not_in: [Int!]
-
-  """All values less than the given value."""
-  charisma_lt: Int
-
-  """All values less than or equal the given value."""
-  charisma_lte: Int
-
-  """All values greater than the given value."""
-  charisma_gt: Int
-
-  """All values greater than or equal the given value."""
-  charisma_gte: Int
-  fighting: Int
-
-  """All values that are not equal to given value."""
-  fighting_not: Int
-
-  """All values that are contained in given list."""
-  fighting_in: [Int!]
-
-  """All values that are not contained in given list."""
-  fighting_not_in: [Int!]
-
-  """All values less than the given value."""
-  fighting_lt: Int
-
-  """All values less than or equal the given value."""
-  fighting_lte: Int
-
-  """All values greater than the given value."""
-  fighting_gt: Int
-
-  """All values greater than or equal the given value."""
-  fighting_gte: Int
-  wits: Int
-
-  """All values that are not equal to given value."""
-  wits_not: Int
-
-  """All values that are contained in given list."""
-  wits_in: [Int!]
-
-  """All values that are not contained in given list."""
-  wits_not_in: [Int!]
-
-  """All values less than the given value."""
-  wits_lt: Int
-
-  """All values less than or equal the given value."""
-  wits_lte: Int
-
-  """All values greater than the given value."""
-  wits_gt: Int
-
-  """All values greater than or equal the given value."""
-  wits_gte: Int
-}
-
 type AdventureSubscriptionPayload {
   mutation: MutationType!
   node: Adventure
@@ -428,19 +132,6 @@ input AdventureSubscriptionWhereInput {
   node: AdventureWhereInput
 }
 
-input AdventureUpdateDataInput {
-  title: String
-  isAlive: Boolean
-  act: Int
-  page: Int
-  healthPoints: Int
-  maxHealthPoints: Int
-  charisma: Int
-  fighting: Int
-  wits: Int
-  weapons: WeaponUpdateManyInput
-}
-
 input AdventureUpdateInput {
   title: String
   isAlive: Boolean
@@ -452,29 +143,7 @@ input AdventureUpdateInput {
   fighting: Int
   wits: Int
   weapons: WeaponUpdateManyInput
-}
-
-input AdventureUpdateManyDataInput {
-  title: String
-  isAlive: Boolean
-  act: Int
-  page: Int
-  healthPoints: Int
-  maxHealthPoints: Int
-  charisma: Int
-  fighting: Int
-  wits: Int
-}
-
-input AdventureUpdateManyInput {
-  create: [AdventureCreateInput!]
-  connect: [AdventureWhereUniqueInput!]
-  disconnect: [AdventureWhereUniqueInput!]
-  delete: [AdventureWhereUniqueInput!]
-  update: [AdventureUpdateWithWhereUniqueNestedInput!]
-  updateMany: [AdventureUpdateManyWithWhereNestedInput!]
-  deleteMany: [AdventureScalarWhereInput!]
-  upsert: [AdventureUpsertWithWhereUniqueNestedInput!]
+  user: UserUpdateOneRequiredInput
 }
 
 input AdventureUpdateManyMutationInput {
@@ -487,22 +156,6 @@ input AdventureUpdateManyMutationInput {
   charisma: Int
   fighting: Int
   wits: Int
-}
-
-input AdventureUpdateManyWithWhereNestedInput {
-  where: AdventureScalarWhereInput!
-  data: AdventureUpdateManyDataInput!
-}
-
-input AdventureUpdateWithWhereUniqueNestedInput {
-  where: AdventureWhereUniqueInput!
-  data: AdventureUpdateDataInput!
-}
-
-input AdventureUpsertWithWhereUniqueNestedInput {
-  where: AdventureWhereUniqueInput!
-  update: AdventureUpdateDataInput!
-  create: AdventureCreateInput!
 }
 
 input AdventureWhereInput {
@@ -799,6 +452,7 @@ input AdventureWhereInput {
   weapons_every: WeaponWhereInput
   weapons_some: WeaponWhereInput
   weapons_none: WeaponWhereInput
+  user: UserWhereInput
 }
 
 input AdventureWhereUniqueInput {
@@ -1305,36 +959,36 @@ Long can represent values between -(2^63) and 2^63 - 1.
 scalar Long
 
 type Mutation {
-  createUser(data: UserCreateInput!): User!
+  createAdventure(data: AdventureCreateInput!): Adventure!
   createAspect(data: AspectCreateInput!): Aspect!
   createItem(data: ItemCreateInput!): Item!
   createWeapon(data: WeaponCreateInput!): Weapon!
-  createAdventure(data: AdventureCreateInput!): Adventure!
-  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  createUser(data: UserCreateInput!): User!
+  updateAdventure(data: AdventureUpdateInput!, where: AdventureWhereUniqueInput!): Adventure
   updateAspect(data: AspectUpdateInput!, where: AspectWhereUniqueInput!): Aspect
   updateItem(data: ItemUpdateInput!, where: ItemWhereUniqueInput!): Item
   updateWeapon(data: WeaponUpdateInput!, where: WeaponWhereUniqueInput!): Weapon
-  updateAdventure(data: AdventureUpdateInput!, where: AdventureWhereUniqueInput!): Adventure
-  deleteUser(where: UserWhereUniqueInput!): User
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  deleteAdventure(where: AdventureWhereUniqueInput!): Adventure
   deleteAspect(where: AspectWhereUniqueInput!): Aspect
   deleteItem(where: ItemWhereUniqueInput!): Item
   deleteWeapon(where: WeaponWhereUniqueInput!): Weapon
-  deleteAdventure(where: AdventureWhereUniqueInput!): Adventure
-  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  deleteUser(where: UserWhereUniqueInput!): User
+  upsertAdventure(where: AdventureWhereUniqueInput!, create: AdventureCreateInput!, update: AdventureUpdateInput!): Adventure!
   upsertAspect(where: AspectWhereUniqueInput!, create: AspectCreateInput!, update: AspectUpdateInput!): Aspect!
   upsertItem(where: ItemWhereUniqueInput!, create: ItemCreateInput!, update: ItemUpdateInput!): Item!
   upsertWeapon(where: WeaponWhereUniqueInput!, create: WeaponCreateInput!, update: WeaponUpdateInput!): Weapon!
-  upsertAdventure(where: AdventureWhereUniqueInput!, create: AdventureCreateInput!, update: AdventureUpdateInput!): Adventure!
-  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  updateManyAdventures(data: AdventureUpdateManyMutationInput!, where: AdventureWhereInput): BatchPayload!
   updateManyAspects(data: AspectUpdateManyMutationInput!, where: AspectWhereInput): BatchPayload!
   updateManyItems(data: ItemUpdateManyMutationInput!, where: ItemWhereInput): BatchPayload!
   updateManyWeapons(data: WeaponUpdateManyMutationInput!, where: WeaponWhereInput): BatchPayload!
-  updateManyAdventures(data: AdventureUpdateManyMutationInput!, where: AdventureWhereInput): BatchPayload!
-  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  deleteManyAdventures(where: AdventureWhereInput): BatchPayload!
   deleteManyAspects(where: AspectWhereInput): BatchPayload!
   deleteManyItems(where: ItemWhereInput): BatchPayload!
   deleteManyWeapons(where: WeaponWhereInput): BatchPayload!
-  deleteManyAdventures(where: AdventureWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -1374,21 +1028,21 @@ enum Permission {
 }
 
 type Query {
-  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  adventures(where: AdventureWhereInput, orderBy: AdventureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Adventure]!
   aspects(where: AspectWhereInput, orderBy: AspectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Aspect]!
   items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item]!
   weapons(where: WeaponWhereInput, orderBy: WeaponOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Weapon]!
-  adventures(where: AdventureWhereInput, orderBy: AdventureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Adventure]!
-  user(where: UserWhereUniqueInput!): User
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  adventure(where: AdventureWhereUniqueInput!): Adventure
   aspect(where: AspectWhereUniqueInput!): Aspect
   item(where: ItemWhereUniqueInput!): Item
   weapon(where: WeaponWhereUniqueInput!): Weapon
-  adventure(where: AdventureWhereUniqueInput!): Adventure
-  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  user(where: UserWhereUniqueInput!): User
+  adventuresConnection(where: AdventureWhereInput, orderBy: AdventureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AdventureConnection!
   aspectsConnection(where: AspectWhereInput, orderBy: AspectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AspectConnection!
   itemsConnection(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ItemConnection!
   weaponsConnection(where: WeaponWhereInput, orderBy: WeaponOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): WeaponConnection!
-  adventuresConnection(where: AdventureWhereInput, orderBy: AdventureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AdventureConnection!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -1398,11 +1052,11 @@ type Query {
 }
 
 type Subscription {
-  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  adventure(where: AdventureSubscriptionWhereInput): AdventureSubscriptionPayload
   aspect(where: AspectSubscriptionWhereInput): AspectSubscriptionPayload
   item(where: ItemSubscriptionWhereInput): ItemSubscriptionPayload
   weapon(where: WeaponSubscriptionWhereInput): WeaponSubscriptionPayload
-  adventure(where: AdventureSubscriptionWhereInput): AdventureSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 
 type User implements Node {
@@ -1413,7 +1067,6 @@ type User implements Node {
   resetToken: String
   resetTokenExpiry: String
   permissions: [Permission!]!
-  adventures(where: AdventureWhereInput, orderBy: AdventureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Adventure!]
   createdAt: DateTime!
 }
 
@@ -1434,7 +1087,11 @@ input UserCreateInput {
   resetToken: String
   resetTokenExpiry: String
   permissions: UserCreatepermissionsInput
-  adventures: AdventureCreateManyInput
+}
+
+input UserCreateOneInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
 }
 
 input UserCreatepermissionsInput {
@@ -1519,6 +1176,15 @@ input UserSubscriptionWhereInput {
   node: UserWhereInput
 }
 
+input UserUpdateDataInput {
+  name: String
+  email: String
+  password: String
+  resetToken: String
+  resetTokenExpiry: String
+  permissions: UserUpdatepermissionsInput
+}
+
 input UserUpdateInput {
   name: String
   email: String
@@ -1526,7 +1192,6 @@ input UserUpdateInput {
   resetToken: String
   resetTokenExpiry: String
   permissions: UserUpdatepermissionsInput
-  adventures: AdventureUpdateManyInput
 }
 
 input UserUpdateManyMutationInput {
@@ -1538,8 +1203,20 @@ input UserUpdateManyMutationInput {
   permissions: UserUpdatepermissionsInput
 }
 
+input UserUpdateOneRequiredInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateDataInput
+  upsert: UserUpsertNestedInput
+}
+
 input UserUpdatepermissionsInput {
   set: [Permission!]
+}
+
+input UserUpsertNestedInput {
+  update: UserUpdateDataInput!
+  create: UserCreateInput!
 }
 
 input UserWhereInput {
@@ -1813,9 +1490,6 @@ input UserWhereInput {
 
   """All values greater than or equal the given value."""
   createdAt_gte: DateTime
-  adventures_every: AdventureWhereInput
-  adventures_some: AdventureWhereInput
-  adventures_none: AdventureWhereInput
 }
 
 input UserWhereUniqueInput {

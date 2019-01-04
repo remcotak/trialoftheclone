@@ -15,7 +15,6 @@ type User {
   resetToken: String
   resetTokenExpiry: String
   permissions: [Permission]
-  adventures: [Adventure]
   createdAt: DateTime!
 }
 
@@ -33,7 +32,7 @@ type Adventure {
   fighting: Int! @default(value: 1)
   wits: Int! @default(value: 0)
   weapons: [Weapon]
-  # user: User!
+  user: User!
   # aspects: [Aspect]
   # inventory: [Item]
   # stats: Stats!

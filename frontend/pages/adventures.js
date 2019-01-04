@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 import AdventuresList from '../components/AdventuresList';
+import AuthUser from '../components/AuthUser';
 import { ButtonAnchor } from '../components/styles/Button';
 
 const AdventuresStyles = styled.div`
@@ -13,15 +14,17 @@ const AdventuresStyles = styled.div`
 `;
 
 const Adventures = ({ query }) => (
-  <AdventuresStyles>
-    <div className="adventures__header">
-      <h1>Your adventures 🎒</h1>
-      <Link href="/create-adventure">
-        <ButtonAnchor>Start new adventure 👊</ButtonAnchor>
-      </Link>
-    </div>
-    <AdventuresList page={parseFloat(query.page) || 1} />
-  </AdventuresStyles>
+  <AuthUser>
+    <AdventuresStyles>
+      <div className="adventures__header">
+        <h1>Your adventures 🎒</h1>
+        <Link href="/create-adventure">
+          <ButtonAnchor>Start new adventure 👊</ButtonAnchor>
+        </Link>
+      </div>
+      <AdventuresList page={parseFloat(query.page) || 1} />
+    </AdventuresStyles>
+  </AuthUser>
 );
 
 export default Adventures;

@@ -16,7 +16,10 @@ const theme = {
   spacingLarge: '40px',
   spacingBase: '20px',
   spacingSmall: '10px',
-  spacingTiny: '5px'
+  spacingTiny: '5px',
+  mob: '480px',
+  lap: '640px',
+  desk: '960px'
 };
 
 const GlobalStyle = createGlobalStyle`

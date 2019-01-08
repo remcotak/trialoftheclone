@@ -144,6 +144,7 @@ class AdventureListItem extends Component {
                 pathname: '/adventure',
                 query: { id: id }
               }}
+              passHref
             >
               <ButtonAnchor>Start! 🎮</ButtonAnchor>
             </Link>

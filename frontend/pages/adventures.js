@@ -18,7 +18,7 @@ const Adventures = ({ query }) => (
     <AdventuresStyles>
       <div className="adventures__header">
         <h1>Your adventures 🎒</h1>
-        <Link href="/create-adventure">
+        <Link href="/create-adventure" passHref>
           <ButtonAnchor>Start new adventure 👊</ButtonAnchor>
         </Link>
       </div>

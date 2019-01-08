@@ -7,7 +7,9 @@ const sharedStyle = css`
   padding: 1rem;
 
   &:active,
+  &:focus,
   &:hover {
+    outline: 0;
     color: ${props => props.theme.primary};
     cursor: pointer;
   }
@@ -22,10 +24,6 @@ const MenuButton = styled.button`
   background: none;
   border: none;
   font-size: 1rem;
-
-  &:focus {
-    outline: 0;
-  }
 `;
 
 export default MenuLink;

@@ -30,19 +30,19 @@ const Header = () => (
   <User>
     {({ data: { me } }) => (
       <StyledHeader>
-        <Link href="/">
+        <Link href="/" passHref>
           <MenuLink>Home</MenuLink>
         </Link>
         {me && (
           <Fragment>
-            <Link href="/adventures">
+            <Link href="/adventures" passHref>
               <MenuLink>Adventures</MenuLink>
             </Link>
             <SignOut>Sign out</SignOut>
           </Fragment>
         )}
         {!me && (
-          <Link href="/sign-in">
+          <Link href="/sign-in" passHref>
             <MenuLink>Sign in</MenuLink>
           </Link>
         )}

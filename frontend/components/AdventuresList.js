@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import AdventureListItem from './AdventureListItem';
+import AdventureSearch from './AdventureSearch';
 import Pagination from './Pagination';
 import styled from 'styled-components';
 import { perPage } from '../config';
@@ -26,7 +27,7 @@ const AdventuresListStyles = styled.div`
   grid-gap: ${props => props.theme.spacingLarge};
   max-width: ${props => props.theme.maxWidth};
 
-  @media screen and (min-width: 680px) {
+  @media screen and (min-width: ${props => props.theme.lap}) {
     grid-template-columns: 1fr 1fr;
   }
 `;
@@ -48,6 +49,7 @@ class AdventuresList extends Component {
 
           return (
             <Fragment>
+              <AdventureSearch />
               <Pagination page={this.props.page} />
               <AdventuresListStyles>
                 {data.adventures.map(adventure => (

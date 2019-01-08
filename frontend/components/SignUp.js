@@ -81,7 +81,7 @@ class SignUp extends Component {
                 />
               </label>
 
-              <Button type="submit">Sign Up! 📋</Button>
+              <Button type="submit">Sign Up!</Button>
             </fieldset>
           </Form>
         )}

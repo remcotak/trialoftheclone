@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Router from 'next/router';
+import Link from 'next/link';
 import Form from './styles/Form';
 import Button from './styles/Button';
 import Error from './ErrorMessage';
@@ -66,9 +67,14 @@ class SignIn extends Component {
                   value={this.state.password}
                   onChange={this.handleChange}
                 />
+                {/* <Link href="/sign-up">I forgot my password</Link> */}
               </label>
-
-              <Button type="submit">Sign In! ✈️</Button>
+              <Button type="submit">Sign In!</Button>
+              <div className="form__actions">
+                <Link href="/sign-up">
+                  Don't have an account yet? Sign up here!
+                </Link>
+              </div>
             </fieldset>
           </Form>
         )}

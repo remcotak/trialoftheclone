@@ -81,6 +81,7 @@ class CreateAdventure extends Component {
                   placeholder="title"
                   value={this.state.title}
                   onChange={this.handleChange}
+                  required
                 />
               </label>
               <label htmlFor="act">
@@ -92,6 +93,7 @@ class CreateAdventure extends Component {
                   placeholder="act"
                   value={this.state.act}
                   onChange={this.handleChange}
+                  required
                 />
               </label>
               <label htmlFor="page">
@@ -103,6 +105,7 @@ class CreateAdventure extends Component {
                   placeholder="page"
                   value={this.state.page}
                   onChange={this.handleChange}
+                  required
                 />
               </label>
               <Button type="submit">Begin adventure! 🏃‍</Button>

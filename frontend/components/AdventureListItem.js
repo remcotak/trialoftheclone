@@ -39,6 +39,7 @@ const AdventureListItemStyles = styled.div`
     display: inline-block;
     margin: 0;
     margin-bottom: ${props => props.theme.spacingSmall};
+    color: ${props => props.theme.black};
 
     &::after {
       content: '';
@@ -168,11 +169,12 @@ class AdventureListItem extends Component {
                     if (
                       confirm('Are you sure you want to delete this adventure?')
                     ) {
-                      deleteAdventure();
+                      deleteAdventure().catch(err => alert(err.message));
                     }
                   }}
+                  disabled={loading}
                 >
-                  Delete 🗑
+                  Delet{loading ? 'ing' : 'e'} 🗑
                 </Button>
               );
             }}

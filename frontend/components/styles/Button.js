@@ -46,6 +46,7 @@ const Button = styled.button`
 
 const ButtonAnchor = styled.a`
   ${sharedStyle}
+  text-decoration: none;
 `;
 
 export default Button;

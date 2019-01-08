@@ -53,7 +53,6 @@ const Form = styled.form`
   label {
     display: block;
     font-weight: 700;
-    margin-bottom: ${props => props.theme.spacingBase};
   }
 
   input,
@@ -66,6 +65,7 @@ const Form = styled.form`
     border-bottom: 2px solid ${props => props.theme.black};
     padding: ${props => props.theme.spacingSmall} 0
       ${props => props.theme.spacingTiny};
+    margin-bottom: ${props => props.theme.spacingBase};
 
     &:focus {
       outline: 0;
@@ -73,10 +73,14 @@ const Form = styled.form`
     }
   }
 
-  .form__group {
+  .form__row {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     grid-gap: ${props => props.theme.spacingBase};
+  }
+
+  .form__actions {
+    margin-top: ${props => props.theme.spacingBase};
   }
 `;
 

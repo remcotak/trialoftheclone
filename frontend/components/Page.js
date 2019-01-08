@@ -66,8 +66,8 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'FjallaOne-Regular';
   }
   a {
-    text-decoration: none;
-    color: ${theme.black};
+    text-decoration: underline;
+    color: ${theme.secondary};
   }
 `;
 

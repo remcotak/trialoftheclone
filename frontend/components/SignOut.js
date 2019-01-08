@@ -21,9 +21,9 @@ const signOut = props => (
     {signOut => (
       <MenuButton
         onClick={async () => {
-          await signOut();
           // Redirect to single page with given id
           Router.push('/');
+          await signOut();
         }}
       >
         {props.children}

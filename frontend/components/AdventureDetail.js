@@ -4,6 +4,7 @@ import { Mutation, Query } from 'react-apollo';
 import Form from './styles/Form';
 import Button from './styles/Button';
 import Error from './ErrorMessage';
+import Weapons from './Weapons';
 
 const SINGLE_ADVENTURE_QUERY = gql`
   query SINGLE_ADVENTURE_QUERY($id: ID!) {
@@ -30,13 +31,18 @@ const UPDATE_ADVENTURE_MUTATION = gql`
     $title: String
     $act: Int
     $page: Int
+    $healthPoints: Int
+    $maxHealthPoints: Int
+    $charisma: Int
+    $fighting: Int
+    $wits: Int
   ) {
     updateAdventure(
       id: $id
       title: $title
       act: $act
       page: $page
-      healthPoints: $page
+      healthPoints: $healthPoints
       maxHealthPoints: $maxHealthPoints
       charisma: $charisma
       fighting: $fighting
@@ -70,7 +76,7 @@ class AdventureDetail extends Component {
     // Stop submitting the form
     e.preventDefault();
     // Call the mutation
-    const res = await updateAdventure({
+    await updateAdventure({
       variables: {
         id: this.props.id,
         ...this.state
@@ -104,9 +110,10 @@ class AdventureDetail extends Component {
                         placeholder="title"
                         defaultValue={data.adventure.title}
                         onChange={this.handleChange}
+                        required
                       />
                     </label>
-                    <div className="form__group">
+                    <div className="form__row">
                       <label htmlFor="act">
                         Act
                         <input
@@ -116,6 +123,7 @@ class AdventureDetail extends Component {
                           placeholder="act"
                           defaultValue={data.adventure.act}
                           onChange={this.handleChange}
+                          required
                         />
                       </label>
                       <label htmlFor="page">
@@ -127,11 +135,12 @@ class AdventureDetail extends Component {
                           placeholder="page"
                           defaultValue={data.adventure.page}
                           onChange={this.handleChange}
+                          required
                         />
                       </label>
                     </div>
                     <h2>Stats</h2>
-                    <div className="form__group">
+                    <div className="form__row">
                       <label htmlFor="healthPoints">
                         Health points
                         <input
@@ -141,6 +150,7 @@ class AdventureDetail extends Component {
                           placeholder="healthPoints"
                           defaultValue={data.adventure.healthPoints}
                           onChange={this.handleChange}
+                          required
                         />
                       </label>
                       <label htmlFor="maxHealthPoints">
@@ -152,10 +162,11 @@ class AdventureDetail extends Component {
                           placeholder="maxHealthPoints"
                           defaultValue={data.adventure.maxHealthPoints}
                           onChange={this.handleChange}
+                          required
                         />
                       </label>
                     </div>
-                    <div className="form__group">
+                    <div className="form__row">
                       <label htmlFor="charisma">
                         Charisma
                         <input
@@ -165,6 +176,7 @@ class AdventureDetail extends Component {
                           placeholder="charisma"
                           defaultValue={data.adventure.charisma}
                           onChange={this.handleChange}
+                          required
                         />
                       </label>
                       <label htmlFor="fighting">
@@ -176,6 +188,7 @@ class AdventureDetail extends Component {
                           placeholder="fighting"
                           defaultValue={data.adventure.fighting}
                           onChange={this.handleChange}
+                          required
                         />
                       </label>
                       <label htmlFor="wits">
@@ -187,24 +200,11 @@ class AdventureDetail extends Component {
                           placeholder="wits"
                           defaultValue={data.adventure.wits}
                           onChange={this.handleChange}
+                          required
                         />
                       </label>
                     </div>
-                    <h2>Weapons</h2>
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Name</th>
-                          <th>Effect</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>Name</td>
-                          <td>Effect</td>
-                        </tr>
-                      </tbody>
-                    </table>
+                    <Weapons data={data} handleChange={this.handleChange} />
                     <Button type="submit">
                       Sav{loading ? 'ing' : 'e'} adventure! 💾
                     </Button>

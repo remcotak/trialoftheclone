@@ -9,7 +9,17 @@ type Mutation {
   signIn(email: String!, password: String!): User!
   signOut: SuccessMessage
   createAdventure(title: String!, act: Int, page: Int): Adventure!
-  updateAdventure(id: ID!, title: String, act: Int, page: Int): Adventure!
+  updateAdventure(
+    id: ID!
+    title: String
+    act: Int
+    page: Int
+    healthPoints: Int
+    maxHealthPoints: Int
+    charisma: Int
+    fighting: Int
+    wits: Int
+  ): Adventure!
   deleteAdventure(id: ID!): Adventure
 }
 

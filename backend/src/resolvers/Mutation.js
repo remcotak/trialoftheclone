@@ -6,7 +6,9 @@ const Mutations = {
     if (!ctx.request.userId) {
       throw new Error('You must be logged in to do that!');
     }
-
+    if (!args.title) {
+      throw new Error('You must fill in the title!');
+    }
     const adventure = await ctx.db.mutation.createAdventure(
       {
         data: {
@@ -26,6 +28,9 @@ const Mutations = {
   },
 
   async updateAdventure(parent, args, ctx, info) {
+    if (!args.title) {
+      throw new Error('You must fill in the title!');
+    }
     // Take a copy of the updates
     const updates = { ...args };
     // Then delete the id, since we dont want to update that
@@ -106,7 +111,7 @@ const Mutations = {
     return user;
   },
 
-  async signOut(parent, { id }, ctx, info) {
+  async signOut(parent, args, ctx, info) {
     ctx.response.clearCookie('token');
     return { message: 'Goodbye!' };
   }
